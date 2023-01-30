@@ -1,0 +1,18 @@
+.newsletter-input input{
+	background-color: #fff !important;
+	color: black !important;
+	padding: 15px 20px !important;
+    height: auto !important;
+    border-radius: 40px !important;
+
+}
+.newsletter__submit{
+	background-color: #e21f1e;
+    padding: 10px 25px;
+    color: #fff;
+    border-radius: 40px;
+    right: 5px;
+}
+.newsletter-input{
+    background-color: transparent !important;
+}

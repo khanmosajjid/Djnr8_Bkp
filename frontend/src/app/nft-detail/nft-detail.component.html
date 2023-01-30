@@ -1,0 +1,1824 @@
+<app-header></app-header>
+
+<main class="main">
+  <div class="container">
+    <div class="row row--grid">
+      <!-- breadcrumb -->
+      <div class="col-12">
+        <ul class="breadcrumb">
+          <li class="breadcrumb__item">
+            <a href="javascript:;" routerLink="">Home</a>
+          </li>
+          <li class="breadcrumb__item">
+            <a href="javascript:;" routerLink="/marketplace">Marketplace</a>
+          </li>
+          <li class="breadcrumb__item breadcrumb__item--active">NFT</li>
+        </ul>
+      </div>
+      <!-- end breadcrumb -->
+
+      <!-- title -->
+      <!-- <div class="col-12">
+        <div class="main__title main__title--page">
+          <h1>
+            {{
+            NFTData.sName && NFTData.sName != undefined ? NFTData.sName : "-"
+            }}
+          </h1>
+        </div>
+      </div> -->
+      <!-- end title -->
+    </div>
+
+    <div class="row">
+      <!-- content -->
+      <div class="col-12 col-xl-7">
+        <div class="asset__item audio__card single_nft_card">
+          <a class="asset__img" *ngIf="
+              NFTData.eType &&
+              NFTData.eType != undefined &&
+              NFTData.eType != 'Audio' &&
+              NFTData.eType != 'Video'
+            " href="{{
+              NFTData && NFTData.sHash && NFTData.sHash != undefined
+                ? 'https://ipfs.infura.io/ipfs/' + NFTData.sHash
+                : 'assets/img/cover/cover-big.jpg'
+            }}">
+            <img class="styl image-fluid" src="{{
+                NFTData && NFTData.sHash && NFTData.sHash != undefined
+                  ? 'https://ipfs.infura.io/ipfs/' +
+                    NFTData.sHash
+                  : 'assets/img/cover/cover-big.jpg'
+              }}" alt="" />
+          </a>
+          <ng-container *ngIf="
+              NFTData.eType &&
+              NFTData.eType != undefined &&
+              NFTData.eType == 'Audio'
+            ">
+            <div class="audioPlayerMain single__audio_card"
+              [style.background-image]="'url(' + NFTData.track_cover + ')'">
+              <div class="audio__overlay">
+                <button value="{{
+                    NFTData._id && NFTData._id != undefined ? NFTData._id : '-'
+                  }}" class="play audio-control-btn">
+                  <span class="iconify" data-icon="akar-icons:play" data-width="45" data-height="45"></span>
+                </button>
+                <button value="{{
+                    NFTData._id && NFTData._id != undefined ? NFTData._id : '-'
+                  }}" class="pause audio-control-btn d-none">
+                  <span class="iconify" data-icon="akar-icons:pause" data-width="45" data-height="45"></span>
+                </button>
+              </div>
+
+              <audio id="{{
+                  NFTData._id && NFTData._id != undefined ? NFTData._id : '-'
+                }}" controls controlsList="nodownload" style="margin: 500px 0px 0px 250px" src="{{
+                  NFTData.sHash && NFTData.sHash != undefined
+                    ? 'https://ipfs.infura.io/ipfs/' +
+                      NFTData.sHash
+                    : 'assets/img/cover/cover-big.jpg'
+                }}" type="audio/mp3" id="src" class="sty"></audio>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="
+              NFTData.eType &&
+              NFTData.eType != undefined &&
+              NFTData.eType == 'Video'
+            ">
+            <div class="audioPlayerMain VideoBG single__audio_card" >
+              <div class="audio__overlay">
+                <button value="{{
+                    NFTData._id && NFTData._id != undefined ? NFTData._id : '-'
+                  }}" class="play video-control-btn-singlePage">
+                  <span class="iconify" data-icon="akar-icons:play" data-width="45" data-height="45"></span>
+                </button>
+                <button value="{{
+                    NFTData._id && NFTData._id != undefined ? NFTData._id : '-'
+                  }}" class="pause video-control-btn-singlePage d-none">
+                  <span class="iconify" data-icon="akar-icons:pause" data-width="45" data-height="45"></span>
+                </button>
+              </div>
+
+              <video id="SingleNFTVideo" controls
+                playsinline
+                (play)="startVideo()"
+                (pause)="stopVideo()"
+                poster = "{{ NFTData.track_cover }}"
+                controlsList="nodownload" src="{{
+                  NFTData.sHash && NFTData.sHash != undefined
+                    ? 'https://ipfs.infura.io/ipfs/' +
+                      NFTData.sHash
+                    : 'assets/img/cover/cover-big.jpg'
+                }}" class="sty Videoplayer"></video>
+            </div>
+          </ng-container>
+          <!-- eType -->
+          <!-- share -->
+          <!-- <div class="share share--asset">
+                        <a href="#" class="share__link share__link--fb"><svg width="9" height="17" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.56341 16.8197V8.65888H7.81615L8.11468 5.84663H5.56341L5.56724 4.43907C5.56724 3.70559 5.63693 3.31257 6.69042 3.31257H8.09873V0.5H5.84568C3.1394 0.5 2.18686 1.86425 2.18686 4.15848V5.84695H0.499939V8.6592H2.18686V16.8197H5.56341Z"/></svg> <span>share</span></a>
+                        <a href="#" class="share__link share__link--tw"><svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.55075 3.19219L7.58223 3.71122L7.05762 3.64767C5.14804 3.40404 3.47978 2.57782 2.06334 1.1902L1.37085 0.501686L1.19248 1.01013C0.814766 2.14353 1.05609 3.34048 1.843 4.14552C2.26269 4.5904 2.16826 4.65396 1.4443 4.38914C1.19248 4.3044 0.972149 4.24085 0.951164 4.27263C0.877719 4.34677 1.12953 5.31069 1.32888 5.69202C1.60168 6.22165 2.15777 6.74068 2.76631 7.04787L3.28043 7.2915L2.67188 7.30209C2.08432 7.30209 2.06334 7.31268 2.12629 7.53512C2.33613 8.22364 3.16502 8.95452 4.08833 9.2723L4.73884 9.49474L4.17227 9.8337C3.33289 10.321 2.34663 10.5964 1.36036 10.6175C0.888211 10.6281 0.5 10.6705 0.5 10.7023C0.5 10.8082 1.78005 11.4014 2.52499 11.6344C4.75983 12.3229 7.41435 12.0264 9.40787 10.8506C10.8243 10.0138 12.2408 8.35075 12.9018 6.74068C13.2585 5.88269 13.6152 4.315 13.6152 3.56293C13.6152 3.07567 13.6467 3.01212 14.2343 2.42953C14.5805 2.09056 14.9058 1.71983 14.9687 1.6139C15.0737 1.41264 15.0632 1.41264 14.5281 1.59272C13.6362 1.91049 13.5103 1.86812 13.951 1.39146C14.2762 1.0525 14.6645 0.438131 14.6645 0.258058C14.6645 0.22628 14.5071 0.279243 14.3287 0.374576C14.1398 0.480501 13.7202 0.639389 13.4054 0.734722L12.8388 0.914795L12.3247 0.565241C12.0414 0.374576 11.6427 0.162725 11.4329 0.0991699C10.8978 -0.0491255 10.0794 -0.0279404 9.59673 0.14154C8.2852 0.618204 7.45632 1.84694 7.55075 3.19219Z"/></svg> <span>tweet</span></a>
+                        <a href="#" class="share__link share__link--link"><svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8,12a1,1,0,0,0,1,1h6a1,1,0,0,0,0-2H9A1,1,0,0,0,8,12Zm2,3H7A3,3,0,0,1,7,9h3a1,1,0,0,0,0-2H7A5,5,0,0,0,7,17h3a1,1,0,0,0,0-2Zm7-8H14a1,1,0,0,0,0,2h3a3,3,0,0,1,0,6H14a1,1,0,0,0,0,2h3A5,5,0,0,0,17,7Z"/></svg> <span>copy link</span></a>
+                    </div> -->
+          <!-- end share -->
+
+          <!-- likes -->
+
+          <span class="card__time card__time--clock" *ngIf="NFTData.erc721 === true && NFTOwnerData.eAuctionType &&
+          NFTOwnerData.eAuctionType != undefined &&NFTOwnerData.eAuctionType !=='Unlockable' " style="left: 20px">
+
+            {{
+            NFTOwnerData.eAuctionType &&
+            NFTOwnerData.eAuctionType != undefined
+            ? NFTOwnerData.eAuctionType
+            : "-"
+            }}
+          </span>
+          <span class="card__time card__time--clock" *ngIf="NFTData.erc721 === true && NFTOwnerData.eAuctionType &&
+          NFTOwnerData.eAuctionType != undefined && NFTOwnerData.eAuctionType ==='Unlockable' " style="left: 20px">
+
+          NotOnSale
+          </span>
+
+          <span class="card__time card__time--clock" *ngIf="NFTData.erc721 === false" style="left: 20px">
+
+            {{ NFTAuctionType }}
+          </span>
+          <span class="card__time card__time--clock"
+            *ngIf="NFTData.hiddenContent!=''&& NFTData.hiddenContent!=undefined" style="left: 170px">
+
+            NFT Pack
+
+          </span>
+          
+          <!--Download Option for owner-->
+          
+          <span class="card__time card__time--clock"  *ngIf="
+          NFTOwnerData &&
+          NFTOwnerData.oCurrentOwner &&
+          NFTOwnerData.oCurrentOwner != undefined &&
+          showObj.wallet_address ==
+            NFTOwnerData.oCurrentOwner.sWalletAddress && connect==true && NFTData.loggedinUserId !=''
+          "
+
+           style="left: 84%;    border: none;
+           background: transparent;">
+            <a  href="https://ipfs.infura.io/ipfs/{{NFTData.sHash}}"  target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 40%; fill:#fff">
+                <path d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z"/>
+               </svg>
+            </a>
+           
+
+          </span>
+          
+          <!--Download option end-->
+
+          <!-- <button
+            class="card__likes"
+            (click)="clickLike(NFTData._id)"
+            [ngClass]="{
+              'card__likes--active': NFTData.is_user_like == 'true'
+            }"
+            type="button"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"
+              />
+            </svg>
+
+            <span>{{
+              NFTData.user_likes && NFTData.user_likes != undefined
+                ? NFTData.user_likes.length
+                : "0"
+            }}</span>
+          </button> -->
+
+          <!-- end likes -->
+        </div>
+      </div>
+      <!-- end content -->
+
+      <!-- sidebar -->
+      <div class="col-12 col-xl-5">
+        <div class="asset__info">
+          <div class="d-flex mb-3">
+            
+            <div class="asset__desc" style="    display: flex !important;
+            flex-direction: column;
+            jjustify-content: flex-start;
+    align-items: flex-start;;
+        ">
+              
+              <h1 style="    display: flex;
+              justify-content: center; color: #fff; font-size: 25px !important;">
+                {{
+                NFTData.sName && NFTData.sName != undefined
+                ? NFTData.sName
+                : "-"
+                }}
+              </h1>
+              <p>
+                {{
+                NFTData.sNftdescription && NFTData.sNftdescription != undefined
+                ? NFTData.sNftdescription
+                : "-"
+                }}
+              </p>
+            </div>
+          </div>
+        
+
+          <!-- <div class="asset__desc mb-2">
+            <h2>Description</h2>
+            <p>
+              {{
+              NFTData.sNftdescription && NFTData.sNftdescription != undefined
+              ? NFTData.sNftdescription
+              : "-"
+              }}
+            </p>
+          </div> -->
+          <div class=" row d-flex mb-3">
+            <div class="col-3 asset__desc" style="width: 190px">
+              <h2>BPM</h2>
+              <p style="display: flex;
+              justify-content: center;
+              align-items: center;">
+                {{
+                NFTData.sBpm && NFTData.sBpm != undefined
+                ? NFTData.sBpm
+                : "-"
+                }}
+              </p>
+            </div>
+            <div class="col-3 asset__desc">
+              <h2 style="display: flex;
+              justify-content: center;
+              align-items: center;">Key</h2>
+              <p style="display: flex;
+              justify-content: center;
+              align-items: center;">
+                {{
+                NFTData.skey_equalTo && NFTData.skey_equalTo != undefined
+                ? NFTData.skey_equalTo
+                : "-"
+                }}
+              </p>
+            </div>
+            <div class="col-3 asset__desc">
+              <h2>Editions</h2>
+              <p style="display: flex;
+              justify-content: center;
+              align-items: center;">
+                {{
+                NFTData.nQuantity && NFTData.nQuantity != undefined
+                ? NFTData.nQuantity
+                : "-"
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="asset__btns d-flex text-align-between" *ngIf="
+          (NFTData.hiddenContent!='')&&
+          NFTOwnerData &&
+          NFTOwnerData.oCurrentOwner &&
+          NFTOwnerData.oCurrentOwner != undefined &&
+          showObj.wallet_address ==
+            NFTOwnerData.oCurrentOwner.sWalletAddress && connect==true && NFTData.loggedinUserId !=''
+      
+          
+          ">
+            <a class="author__follow mt-2" (click)="hiddenContentModal()"
+              class="asset__btn asset__btn--full asset__btn--clr open-modal">Unlock Hidden Content</a>
+
+          </div>
+
+          <!-- <div
+            class="asset__desc"
+            *ngIf="NFTOwnerData.eAuctionType != 'Fixed Sale'"
+          >
+            <h2>Time Left</h2>
+            <p>
+              {{
+                auct_time.hours && auct_time.hours != undefined
+                  ? auct_time.hours
+                  : "0"
+              }}
+              HH :
+              {{
+                auct_time.mins && auct_time.mins != undefined
+                  ? auct_time.mins
+                  : "0"
+              }}
+              MM :
+              {{
+                auct_time.secs && auct_time.secs != undefined
+                  ? auct_time.secs
+                  : "0"
+              }}
+              SS
+            </p>
+          </div> -->
+
+          <ul class="asset__authors">
+            <li>
+              <span>Creator</span>
+              <div class="asset__author">
+                <img src="{{
+                    NFTData &&
+                    NFTData.oPostedBy &&
+                    NFTData.oPostedBy != undefined &&
+                    NFTData.oPostedBy.sProfilePicUrl != undefined
+                      ? 'https://ipfs.infura.io/ipfs/' +
+                        NFTData.oPostedBy.sProfilePicUrl
+                      : 'assets/img/avatars/avatar5.jpg'
+                  }}" alt="" />
+                <!-- oCurrentOwner -->
+                <a href="javascript:;" *ngIf=" NFTData.oPostedBy.sUserName.length>=10"
+                  routerLink="/artist/{{NFTData && NFTData != undefined && NFTData.oPostedBy !=undefined && NFTData.oPostedBy.sUserName ? NFTData.oPostedBy.sUserName : NFTData.oPostedBy._id}}"
+                  class="main__link">
+
+                  {{
+                  NFTData &&
+                  NFTData.oPostedBy &&
+                  NFTData.oPostedBy.sUserName &&
+                  NFTData.oPostedBy.sUserName != undefined &&
+                  NFTData.oPostedBy.sUserName != ''
+                  ? NFTData.oPostedBy.sUserName.slice(0,10)
+                  : "-"
+                  }}...
+                </a>
+                <a href="javascript:;" *ngIf=" NFTData.oPostedBy.sUserName.length<10"
+                  routerLink="/artist/{{NFTData && NFTData != undefined && NFTData.oPostedBy !=undefined && NFTData.oPostedBy.sUserName ? NFTData.oPostedBy.sUserName : NFTData.oPostedBy._id}}"
+                  class="main__link">
+
+                  {{
+                  NFTData &&
+                  NFTData.oPostedBy &&
+                  NFTData.oPostedBy.sUserName &&
+                  NFTData.oPostedBy.sUserName != undefined &&
+                  NFTData.oPostedBy.sUserName != ''
+                  ? NFTData.oPostedBy.sUserName
+                  : "-"
+                  }}
+                </a>
+              </div>
+            </li>
+            <li>
+              <span>Collection</span>
+              <div class="asset__author">
+                <img src="{{
+                    NFTData &&
+                    NFTData.sCollectionDetail &&
+                    NFTData.sCollectionDetail != undefined &&
+                    NFTData.sCollectionDetail.sHash != undefined
+                      ? 'https://ipfs.infura.io/ipfs/' +
+                        NFTData.sCollectionDetail.sHash
+                      : 'assets/img/avatars/avatar9.jpg'
+                  }}" alt="assets/img/avatars/avatar9.jpg" />
+
+
+
+                <a href="javascript:;" routerLink="/collections/{{
+                  NFTData.sCollection && NFTData.sCollection != undefined ? NFTData.sCollection : '-'
+                }}" (click)="copyInputMessage(NFTData.sCollection)">{{
+                  NFTData.sCollection && NFTData.sCollection != undefined
+                  ? (NFTData.sCollection | slice: 0:6)
+                  : "-"
+                  }}...{{
+                  NFTData.sCollection && NFTData.sCollection != undefined
+                  ? (NFTData.sCollection | slice: -4)
+                  : "-"
+                  }}</a>
+              </div>
+            </li>
+          </ul>
+
+          <!-- tabs -->
+          
+          <!-- end tabs -->
+          <!-- *ngIf="NFTData.erc721 === false" -->
+
+          
+
+          <div class="asset__wrap" style="align-items: flex-start !important;"> 
+            <!-- <div class="asset__timer">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M18.3,8.59l.91-.9a1,1,0,0,0-1.42-1.42l-.9.91a8,8,0,0,0-9.79,0l-.91-.92A1,1,0,0,0,4.77,7.69l.92.91A7.92,7.92,0,0,0,4,13.5,8,8,0,1,0,18.3,8.59ZM12,19.5a6,6,0,1,1,6-6A6,6,0,0,1,12,19.5Zm-2-15h4a1,1,0,0,0,0-2H10a1,1,0,0,0,0,2Zm3,6a1,1,0,0,0-2,0v1.89a1.5,1.5,0,1,0,2,0Z" />
+                                </svg> Auction ends in</span>
+                            <div class="asset__clock"></div>
+                        </div> -->
+
+            <div class=" asset__price" style="padding-left: 0px !important;" >
+              <span *ngIf="NFTOwnerData.eAuctionType == 'Auction'">Minimum bid</span>
+              <span *ngIf="NFTOwnerData.eAuctionType == 'Fixed Sale'">Fixed price</span>
+              <span *ngIf="NFTOwnerData.eAuctionType == 'Unlockable'">Not On Sale</span>
+
+              <span *ngIf="NFTOwnerData.eAuctionType=='Fixed Sale' && NFTOwnerData.sTransactionStatus !==-99" style="font-size: 12px">{{
+                NFTOwnerData.nBasePrice &&
+                NFTOwnerData.nBasePrice != undefined &&
+                NFTOwnerData.nBasePrice["$numberDecimal"] != undefined
+                ? NFTOwnerData.nBasePrice["$numberDecimal"]
+                : "-"
+                }}
+                MATIC</span>
+              
+              <span *ngIf="NFTOwnerData.eAuctionType =='Auction'&& NFTOwnerData.sTransactionStatus !==-99" style="font-size: 12px">{{
+                NFTOwnerData.nBasePrice &&
+                NFTOwnerData.nBasePrice != undefined &&
+                NFTOwnerData.nBasePrice["$numberDecimal"] != undefined
+                ? NFTOwnerData.nBasePrice["$numberDecimal"]
+                : "-"
+                }}
+                USDC</span>
+                <span *ngIf="NFTOwnerData.sTransactionStatus ===-99" style="font-size: 12px">
+                  -</span>
+            </div>
+            <div class=" asset__price" style="padding-left: 13px !important;" >
+              <span>Editions Owned</span>
+              <span *ngFor="let obj of NFTAllOwnerData">
+                
+                <span *ngIf="obj.oCurrentOwner == CurrentUserID" style="font-size: 12px">
+                  {{ obj.nQuantityLeft > 0 && obj.nQuantityLeft!=undefined && obj.nQuantityLeft !='' ? obj.nQuantityLeft :"" }}
+                </span>
+                
+              </span>
+            </div>
+            <div class=" asset__price"  *ngIf="NFTData.erc721 === false">
+              <span>On Sale</span>
+              <span *ngFor="let obj of NFTAllOwnerData">
+                <span *ngIf="obj.oCurrentOwner == CurrentUserID" style="font-size: 12px">
+                  {{ (obj.nQuantity-obj.nQuantityLeft)>0?obj.nQuantity-obj.nQuantityLeft:"0" }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <ng-container *ngIf="isLogin==false">
+
+
+
+
+
+
+            <div class="asset__btns_top" *ngIf="
+                ShowAuctionBids &&
+                !ShowBuyBtnERC1155 &&
+                nftTypeSaleAuction == 'Auction' &&
+                NFTAllOwnerData.length > 0
+              ">
+              <div class="erc1155_buy_top_section" *ngFor="let ownerobj of NFTAllOwnerData">
+                <div class="erc1155_buy_section_main" *ngFor="let obj of nftCurrentAuctionBidsList">
+                  <div class="erc1155_buy_section buyer_list" *ngIf="
+                      obj.oCurrentOwner != CurrentUserID &&
+                      obj.eBidStatus === 'Bid'
+                    ">{{obj.eAuctionType}}
+                    <span *ngIf="obj.eBidStatus === 'Bid'">
+                      For {{ obj.nBidPrice.$numberDecimal }} USDC by
+                      {{ obj.oBidder }}</span>
+                    <span *ngIf="obj.eAuctionType=='Auction'">
+                      For {{ obj.nBidPrice.$numberDecimal }} MATIC by
+                      {{ obj.oBidder }}</span>
+                  </div>
+                  <div class="buyer_list" *ngIf="
+                      obj.oCurrentOwner != CurrentUserID &&
+                      obj.oCurrentOwner == obj.oBidder &&
+                      obj.eBidStatus != 'Bid'
+                    ">
+
+                  </div>
+
+                </div>
+                <a (click)="metamaskOpenModal()" *ngIf="
+                    nftCurrentAuctionBids.length === 0 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--full asset__btn--clr open-modal">Place a bids</a>
+                <a (click)="metamaskOpenModal()" *ngIf="
+                    nftCurrentAuctionBids.length >= 1 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--half asset__btn--clr open-modal">Place a bid</a>
+
+                <a (click)="metamaskOpenModal()" *ngIf="
+                    nftCurrentAuctionBids.length >= 1 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--half asset__btn--clr open-modal">Cancel bid </a>
+              </div>
+            </div>
+
+            <div class="asset__btns_top" *ngIf="ShowBuyBtnERC1155 && NFTAllOwnerData.length > 0">
+              <div class="erc1155_buy_top_section" *ngFor="let obj of NFTAllOwnerData">
+                <div class="erc1155_buy_section" *ngIf="
+                    obj.eAuctionType == 'Auction' &&
+                    obj.oCurrentOwner != CurrentUserID &&
+                    obj.sTransactionStatus == 1 &&
+                    obj.nQuantity - obj.nQuantityLeft > 0
+                  ">
+                  <span>Owner :
+                    {{
+                    obj.oNFTOwnerDetails[0] &&
+                    obj.oNFTOwnerDetails[0].oName &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname != undefined
+                    ? obj.oNFTOwnerDetails[0].sUserName
+                    : obj.oCurrentOwner
+                    }}</span><br />
+                  <span>Min Bid Amt :
+                    {{ obj.nBasePrice.$numberDecimal }} </span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp; USDC&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span style="margin-left: 1rem;">Editions : {{ obj.nQuantity - obj.nQuantityLeft }}</span>
+                  <a (click)="metamaskOpenModal()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Place
+                    a bid </a>
+                </div>
+                <div class="erc1155_buy_section" *ngIf="
+                    obj.eAuctionType == 'Fixed Sale' &&
+                    obj.oCurrentOwner != CurrentUserID &&
+                    obj.sTransactionStatus == 1 &&
+                    obj.nQuantity - obj.nQuantityLeft > 0
+                  ">
+                  <span>Owner :
+                    {{
+                    obj.oNFTOwnerDetails[0] &&
+                    obj.oNFTOwnerDetails[0].oName &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname != undefined
+                    ? obj.oNFTOwnerDetails[0].sUserName
+                    : obj.oCurrentOwner
+                    }}
+                  </span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price : {{ obj.nBasePrice.$numberDecimal }}</span>
+                  <span>&nbsp;&nbsp;Matic&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                  <span style="margin-left: 1rem;"> Editions : {{ obj.nQuantity - obj.nQuantityLeft }}</span>
+                  <a (click)="metamaskOpenModal()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Buy
+                    now</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="asset__btns">
+
+            </div>
+
+            <div class="asset__btns" *ngIf="
+                showObj.showBuyCurrent == 'show' &&
+                nftTypeSaleAuction == 'Fixed Sale' &&
+                NFTData.erc721 === true &&
+                NFTOwnerData.sTransactionStatus === 1 &&
+                NFTOwnerData.nQuantity != NFTOwnerData.nQuantityLeft
+              ">
+              <a (click)="metamaskOpenModal()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Buy
+                now</a>
+            </div>
+
+            <div class="asset__btns add_funds mt-0">
+              <a (click)="onClickAdd()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Add funds To
+                Wallet </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isLogin && isLogin== true">
+            <!-- <div
+              class="asset__btns"
+              *ngIf="
+                showObj.showTransferCurrent == 'show' &&
+                NFTOwnerData.eAuctionType == 'Unlockable'
+              "
+            >
+              <a
+                href="javascript:;"
+                (click)="onClickOPENPRICE()"
+                class="asset__btn asset__btn--full asset__btn--clr"
+                >Edit Price</a
+              >
+            </div> -->
+
+            <!-- <div class="asset__btns d-flex text-align-between mb-3"
+              *ngIf="(NFTData && NFTData.oCurrentOwner && NFTData.oCurrentOwner != undefined && showObj.wallet_address == NFTData.oCurrentOwner.sWalletAddress) && (NFTOwnerData.eAuctionType == 'Auction'  && NFTOwnerData.sTransactionStatus===1) "
+            > 
+              <a
+                class="asset__btn author__follow author__follow--true"
+                (click)="onClickUpdateType('Unlockable', NFTData._id)"
+                style="width: 200px; cursor: pointer"
+                >Remove from Auction</a
+              >
+            </div> -->
+
+            <div class="asset__btns d-flex text-align-between" *ngIf="
+              (NFTOwnerData.nQuantity>0)&&
+                NFTOwnerData &&
+                NFTData.sTransactionStatus!=-2 &&
+                NFTOwnerData.oCurrentOwner &&
+                NFTOwnerData.oCurrentOwner != undefined &&
+                showObj.wallet_address ==
+                  NFTOwnerData.oCurrentOwner.sWalletAddress &&
+                (NFTOwnerData.sTransactionStatus == -99 ||
+                  (NFTOwnerData.nQuantityLeft > 0 &&
+                    NFTOwnerData.nQuantity - NFTOwnerData.nQuantityLeft == 0))
+              ">
+              <a class="author__follow mt-2" (click)="putOnSaleModal()"
+                class="asset__btn asset__btn--full asset__btn--clr open-modal">Put On Marketplace</a>
+              <!-- <a href="javascript:;" (click)="clickOpen()" class="asset__btn asset__btn--full asset__btn--clr" >Transfer NFT</a> -->
+            </div>
+
+            <div class="asset__btns d-flex text-align-between" *ngIf="
+                NFTOwnerData &&
+                NFTOwnerData.oCurrentOwner &&
+                NFTOwnerData.oCurrentOwner != undefined &&
+                showObj.wallet_address ==
+                  NFTOwnerData.oCurrentOwner.sWalletAddress &&
+                nftTypeSaleAuction == 'Fixed Sale' &&
+                  NFTOwnerData.sTransactionStatus == 1
+              ">
+              <a class="author__follow mt-2" (click)="removeFromSale()"
+                class="asset__btn asset__btn--full asset__btn--clr open-modal" *ngIf="NFTData.erc721 == true">Remove
+                From Sale</a>
+              <a class="author__follow mt-2" (click)="removeFromSale()"
+                class="asset__btn asset__btn--full asset__btn--clr open-modal" *ngIf="
+                  NFTData.erc721 == false &&
+                  NFTOwnerData.nQuantityLeft != NFTOwnerData.nQuantity
+                ">Remove From Sale</a>
+            </div>
+
+            <div class="asset__btns d-flex text-align-between" *ngIf="
+                NFTOwnerData &&
+                NFTOwnerData.oCurrentOwner &&
+                NFTOwnerData.oCurrentOwner != undefined &&
+                showObj.wallet_address ==
+                  NFTOwnerData.oCurrentOwner.sWalletAddress &&
+                nftTypeSaleAuction == 'Auction' &&
+                  NFTOwnerData.sTransactionStatus == 1
+              ">
+              <a class="author__follow mt-2" (click)="removeFromSale()"
+                class="asset__btn asset__btn--full asset__btn--clr open-modal" *ngIf="NFTData.erc721 == true">Remove
+                From Auction</a>
+              <a class="author__follow mt-2" (click)="removeFromSale()"
+                class="asset__btn asset__btn--full asset__btn--clr open-modal" *ngIf="
+                  NFTData.erc721 == false &&
+                  NFTOwnerData.nQuantityLeft != NFTOwnerData.nQuantity
+                ">Remove From Auction</a>
+            </div>
+
+            <div class="asset__btns_top" *ngIf="
+                ShowAuctionBids &&
+                !ShowBuyBtnERC1155 &&
+                nftTypeSaleAuction == 'Auction' &&
+                NFTAllOwnerData.length > 0
+              ">
+              <div class="erc1155_buy_top_section" *ngFor="let ownerobj of NFTAllOwnerData">
+                <div class="erc1155_buy_section_main" *ngFor="let obj of nftCurrentAuctionBidsList">
+                  <div class="erc1155_buy_section buyer_list" *ngIf="
+                      obj.oCurrentOwner != CurrentUserID &&
+                      obj.eBidStatus === 'Bid'
+                    ">{{obj.eAuctionType}}
+                    <span *ngIf="obj.eBidStatus === 'Bid'">
+                      For {{ obj.nBidPrice.$numberDecimal }} USDC by
+                      {{ obj.oBidder }}</span>
+                    <span *ngIf="obj.eAuctionType=='Auction'">
+                      For {{ obj.nBidPrice.$numberDecimal }} MATIC by
+                      {{ obj.oBidder }}</span>
+                  </div>
+                  <div class="buyer_list" *ngIf="
+                      obj.oCurrentOwner != CurrentUserID &&
+                      obj.oCurrentOwner == obj.oBidder &&
+                      obj.eBidStatus != 'Bid'
+                    ">
+
+                  </div>
+
+                </div>
+                <a (click)="bidModal(ownerobj)" *ngIf="
+                    nftCurrentAuctionBids.length === 0 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--full asset__btn--clr open-modal">Place a bid</a>
+                <a (click)="bidModal(ownerobj)" *ngIf="
+                    nftCurrentAuctionBids.length >= 1 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--half asset__btn--clr open-modal">Place a bid</a>
+
+                <a (click)="onClickCancelBid()" *ngIf="
+                    nftCurrentAuctionBids.length >= 1 &&
+                    nftCurrentOwner != CurrentUserID
+                  " class="asset__btn asset__btn--half asset__btn--clr open-modal">Cancel bid </a>
+              </div>
+            </div>
+
+            <div class="asset__btns_top" *ngIf="ShowBuyBtnERC1155 && NFTAllOwnerData.length > 0">
+              <div class="erc1155_buy_top_section" *ngFor="let obj of NFTAllOwnerData">
+                <div class="erc1155_buy_section" *ngIf="
+                    obj.eAuctionType == 'Auction' &&
+                    obj.oCurrentOwner != CurrentUserID &&
+                    obj.sTransactionStatus == 1 &&
+                    obj.nQuantity - obj.nQuantityLeft > 0
+                  ">
+                  <span>Owner :
+                    {{
+                    obj.oNFTOwnerDetails[0] &&
+                    obj.oNFTOwnerDetails[0].oName &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname != undefined
+                    ? obj.oNFTOwnerDetails[0].sUserName
+                    : obj.oCurrentOwner
+                    }}</span><br />
+                  <span>Min Bid Amt :
+                    {{ obj.nBasePrice.$numberDecimal }}</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;   USDC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span style="margin-left: 1rem;">Editions : {{ obj.nQuantity - obj.nQuantityLeft }}</span>
+                  <a (click)="bidModal(obj)" class="asset__btn asset__btn--full asset__btn--clr open-modal">Place a bid
+                  </a>
+                </div>
+                <div class="erc1155_buy_section" *ngIf="
+                    obj.eAuctionType == 'Fixed Sale' &&
+                    obj.oCurrentOwner != CurrentUserID &&
+                    obj.sTransactionStatus == 1 &&
+                    obj.nQuantity - obj.nQuantityLeft > 0
+                  ">
+                  <span>Owner :
+                    {{
+                    obj.oNFTOwnerDetails[0] &&
+                    obj.oNFTOwnerDetails[0].oName &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname &&
+                    obj.oNFTOwnerDetails[0].oName.sFirstname != undefined
+                    ? obj.oNFTOwnerDetails[0].sUserName
+                    : obj.oCurrentOwner
+                    }}
+                  </span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price : {{ obj.nBasePrice.$numberDecimal }}</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Matic &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                  <span style="margin-left: 1rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Editions : {{ obj.nQuantity - obj.nQuantityLeft }}</span>
+                  <a (click)="buyModalOwner(obj)" class="asset__btn asset__btn--full asset__btn--clr open-modal">Buy
+                    now</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="asset__btns">
+              <ng-container>
+                <a href="javascript:;" *ngIf="
+                  (NFTOwnerData.nQuantity>0)&&
+                    NFTOwnerData &&
+                    NFTData.sTransactionStatus!=-2 &&
+                    NFTOwnerData.oCurrentOwner &&
+                    NFTOwnerData.oCurrentOwner != undefined &&
+                    showObj.wallet_address ==
+                      NFTOwnerData.oCurrentOwner.sWalletAddress &&
+                    (NFTOwnerData.sTransactionStatus == -99 ||
+                      (NFTOwnerData.nQuantityLeft > 0 &&
+                        NFTOwnerData.nQuantity - NFTOwnerData.nQuantityLeft == 0))
+                  " (click)="clickOpen()" class="asset__btn asset__btn--full asset__btn--clr">Transfer NFT</a>
+              </ng-container>
+            </div>
+
+            <div class="asset__btns" *ngIf="
+                showObj.showBuyCurrent == 'show' &&
+                nftTypeSaleAuction == 'Fixed Sale' &&
+                NFTData.erc721 === true &&
+                NFTOwnerData.sTransactionStatus === 1 &&
+                NFTOwnerData.nQuantity != NFTOwnerData.nQuantityLeft
+              ">
+              <a (click)="buyModal()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Buy now</a>
+            </div>
+
+            <div class="asset__btns add_funds mt-0">
+              <a (click)="onClickAdd()" class="asset__btn asset__btn--full asset__btn--clr open-modal">Add funds To
+                Wallet </a>
+            </div>
+          </ng-container>
+
+          <ul class="nav nav-tabs asset__tabs" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link active" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3"
+                aria-selected="false">Mint History</a>
+            </li>
+
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade" id="tab-2" role="tabpanel">
+              <ng-container *ngIf="historyData && historyData.length">
+                <div class="asset__actions" *ngFor="let obj of historyData">
+                  <ng-container *ngIf="obj.eBidStatus == 'Bid'">
+                    <div class="asset__action asset__action--verified">
+                      <img src="assets/img/avatars/avatar5.jpg" alt="" />
+                      <p>
+                        Bid placed for
+                        <b>{{
+                          obj &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice["$numberDecimal"] != undefined
+                          ? obj.nBidPrice["$numberDecimal"]
+                          : 0
+                          }}
+                          MATIC</b>
+                        by <br />
+                        <a href="javascript:;">{{
+                          obj &&
+                          obj.oBidder &&
+                          obj.oBidder.oName &&
+                          obj.oBidder.oName != undefined &&
+                          obj.oBidder.oName.sFirstname &&
+                          obj.oBidder.oName.sFirstname != undefined
+                          ? obj.oBidder.oName.sFirstname
+                          : 0
+                          }}
+                          {{
+                          obj.oBidder &&
+                          obj.oBidder.oName &&
+                          obj.oBidder.oName != undefined &&
+                          obj.oBidder.oName.sLastname &&
+                          obj.oBidder.oName.sLastname != undefined
+                          ? obj.oBidder.oName.sLastname
+                          : 0
+                          }}</a>
+                      </p>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="historyData && !historyData.length">
+                <div class="asset__actions">
+                  <div class="asset__action">
+                    <!-- <img src="assets/img/avatars/avatar10.jpg" alt=""> -->
+                    <p>No Bid Found.</p>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <!-- // history tab -->
+            <div class="tab-pane fade show active" id="tab-3" role="tabpanel">
+              <ng-container *ngIf="tokenHistoryData && tokenHistoryData.length">
+                <div class="asset__actions" *ngFor="let obj of tokenHistoryData">
+                  <ng-container *ngIf="
+                      obj.eBidStatus != 'Bid' &&
+                      obj.eBidStatus != 'Canceled' &&
+                      obj.eBidStatus != 'Rejected'
+                    ">
+                    <!-- -for BID -->
+                    <div class="asset__action asset__action--verified" *ngIf="obj.eBidStatus == 'Accepted'">
+                      <img src="{{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder['sProfilePicUrl'] != undefined
+                            ? 'https://ipfs.infura.io/ipfs/' +
+                              obj.oBidder['sProfilePicUrl']
+                            : 'assets/img/avatars/avatar5.jpg'
+                        }}" alt="" />
+                      <p>
+                        Bid placed for
+                        <b>{{
+                          obj &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice["$numberDecimal"] != undefined
+                          ? obj.nBidPrice["$numberDecimal"]
+                          : 0
+                          }}
+                          MATIC</b>
+                        by <br />
+                        <a href="javascript:;" routerLink="/artist/{{
+                            obj.oBidder && obj.oBidder != undefined
+                              ? obj.oBidder._id
+                              : '-'
+                          }}">{{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: 0:5)
+                          : "0x000"
+                          }}...
+                          {{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: -4)
+                          : "0000"
+                          }}</a>
+                        {{
+                        obj && obj.sCreated && obj.sCreated != undefined
+                        ? (obj.sCreated | date: "medium")
+                        : 0
+                        }}.
+                      </p>
+                    </div>
+                    <!-- -for Transfer -->
+                    <div class="asset__action asset__action--verified" *ngIf="obj.eBidStatus == 'Transfer'">
+                      <img src="{{
+                          obj.oRecipient &&
+                          obj.oRecipient != undefined &&
+                          obj.oRecipient['sProfilePicUrl'] != undefined
+                            ? 'https://ipfs.infura.io/ipfs/' +
+                              obj.oRecipient['sProfilePicUrl']
+                            : 'assets/img/avatars/avatar5.jpg'
+                        }}" alt="" />
+                      <p>
+                        Transferred to
+                        <a href="javascript:;" routerLink="/artist/{{
+                            obj.oRecipient && obj.oRecipient != undefined
+                              ? obj.oRecipient._id
+                              : '-'
+                          }}">{{
+                          obj.oRecipient &&
+                          obj.oRecipient != undefined &&
+                          obj.oRecipient["sWalletAddress"] != undefined
+                          ? (obj.oRecipient["sWalletAddress"] | slice: 0:5)
+                          : "0x000"
+                          }}...
+                          {{
+                          obj.oRecipient &&
+                          obj.oRecipient != undefined &&
+                          obj.oRecipient["sWalletAddress"] != undefined
+                          ? (obj.oRecipient["sWalletAddress"] | slice: -4)
+                          : "0000"
+                          }}</a>
+                        by <br />
+                        <a href="javascript:;" routerLink="/artist/{{
+                            obj.oBidder && obj.oBidder != undefined
+                              ? obj.oBidder._id
+                              : '-'
+                          }}">{{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: 0:5)
+                          : "0x000"
+                          }}...
+                          {{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: -4)
+                          : "0000"
+                          }}
+                        </a>
+                        {{
+                        obj && obj.sCreated && obj.sCreated != undefined
+                        ? (obj.sCreated | date: "medium")
+                        : 0
+                        }}.
+                      </p>
+                    </div>
+                    <!-- -for SOLD -->
+                    <div class="asset__action asset__action--verified" *ngIf="obj.eBidStatus == 'Sold'">
+                      <img src="{{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder['sProfilePicUrl'] != undefined
+                            ? 'https://ipfs.infura.io/ipfs/' +
+                              obj.oBidder['sProfilePicUrl']
+                            : 'assets/img/avatars/avatar5.jpg'
+                        }}" alt="" />
+                      <p>
+                        Purchased for
+                        <b>{{
+                          obj &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice &&
+                          obj.nBidPrice["$numberDecimal"] != undefined
+                          ? obj.nBidPrice["$numberDecimal"]
+                          : 0
+                          }}
+                          MATIC</b>
+                        by <br />
+                        <a href="javascript:;" routerLink="/artist/{{
+                            obj.oBidder && obj.oBidder != undefined
+                              ? obj.oBidder._id
+                              : '-'
+                          }}">{{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: 0:5)
+                          : "0x000"
+                          }}...
+                          {{
+                          obj.oBidder &&
+                          obj.oBidder != undefined &&
+                          obj.oBidder["sWalletAddress"] != undefined
+                          ? (obj.oBidder["sWalletAddress"] | slice: -4)
+                          : "0000"
+                          }}
+                        </a>
+                        {{
+                        obj && obj.sCreated && obj.sCreated != undefined
+                        ? (obj.sCreated | date: "medium")
+                        : 0
+                        }}.
+                      </p>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div class="asset__action asset__action--verified">
+                  <img src="{{
+                      NFTData.oPostedBy &&
+                      NFTData.oPostedBy != undefined &&
+                      NFTData.oPostedBy['sProfilePicUrl'] != undefined
+                        ? 'https://ipfs.infura.io/ipfs/' +
+                          NFTData.oPostedBy['sProfilePicUrl']
+                        : 'assets/img/avatars/avatar5.jpg'
+                    }}" alt="" style="width:60px !important;" />
+                  <p>
+                    Minted by
+                    <a href="javascript:;" routerLink="/artist/{{
+                        NFTData.oPostedBy && NFTData.oPostedBy != undefined
+                          ? NFTData.oPostedBy._id
+                          : '-'
+                      }}">{{
+                      NFTData.oPostedBy &&
+                      NFTData.oPostedBy != undefined &&
+                      NFTData.oPostedBy["sWalletAddress"] != undefined
+                      ? (NFTData.oPostedBy["sWalletAddress"] | slice: 0:5)
+                      : "0x000"
+                      }}...
+                      {{
+                      NFTData.oPostedBy &&
+                      NFTData.oPostedBy != undefined &&
+                      NFTData.oPostedBy["sWalletAddress"] != undefined
+                      ? (NFTData.oPostedBy["sWalletAddress"] | slice: -4)
+                      : "0000"
+                      }}
+                    </a>
+                    <span>On</span>
+                   {{
+                    NFTData &&
+                    NFTData.sCreated &&
+                    NFTData.sCreated != undefined
+                    ? (NFTData.sCreated | date: "medium")
+                    : 0
+                    }}.
+                    <span>At Price</span>
+                  {{NFTData.nBasePrice}}
+                  </p>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="historyData && !historyData.length">
+                <div class="asset__actions">
+                  <div class="asset__action">
+                    <img src="{{
+                        NFTData.oPostedBy &&
+                        NFTData.oPostedBy != undefined &&
+                        NFTData.oPostedBy['sProfilePicUrl'] != undefined
+                          ? 'https://ipfs.infura.io/ipfs/' +
+                            NFTData.oPostedBy['sProfilePicUrl']
+                          : 'assets/img/avatars/avatar5.jpg'
+                      }}" alt="" />
+                    <p>
+                      Minted by
+                      <a href="javascript:;" routerLink="/artist/{{
+                          NFTData.oPostedBy && NFTData.oPostedBy != undefined
+                            ? NFTData.oPostedBy._id
+                            : '-'
+                        }}">{{
+                        NFTData.oPostedBy &&
+                        NFTData.oPostedBy != undefined &&
+                        NFTData.oPostedBy["sWalletAddress"] != undefined
+                        ? (NFTData.oPostedBy["sWalletAddress"] | slice: 0:5)
+                        : "0x000"
+                        }}...
+                        {{
+                        NFTData.oPostedBy &&
+                        NFTData.oPostedBy != undefined &&
+                        NFTData.oPostedBy["sWalletAddress"] != undefined
+                        ? (NFTData.oPostedBy["sWalletAddress"] | slice: -4)
+                        : "0000"
+                        }}
+                      </a>
+                      <span>On</span>
+                      {{
+                      NFTData &&
+                      NFTData.sCreated &&
+                      NFTData.sCreated != undefined
+                      ? (NFTData.sCreated | date: "medium")
+                      : 0
+                      }}.
+                      <span>At Price</span>
+                      {{NFTData.nBasePrice.$numberDecimal}} MATIC
+                    </p>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <!-- end actions -->
+        </div>
+
+      </div>
+      <!-- end sidebar -->
+    </div>
+
+    <!-- <span class="card__time card__time--clock" *ngIf="NFTData.erc721 === true" style="left: 20px">
+
+            {{
+              NFTOwnerData.eAuctionType &&
+              NFTOwnerData.eAuctionType != undefined
+                ? NFTOwnerData.eAuctionType
+                : "-"
+            }}
+          </span>
+
+          <span class="card__time card__time--clock" *ngIf="NFTData.erc721 === false" style="left: 20px">
+
+            {{ NFTAuctionType }}
+          </span> -->
+    <div class="row"
+      *ngIf="NFTAuctionType == 'Auction' || NFTAuctionType == 'Auction|Fixed Sale' || NFTAuctionType == 'Fixed Sale|Auction'">
+      <div class="col-12">
+        <div class="main__title main__title--page">
+          <h1>Auction Activity</h1>
+        </div>
+      </div>
+      <table class="table text-white mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Editions</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Txn</th>
+            <th sco pe="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="nftAllAuctionBidsdata && nftAllAuctionBidsdata.length">
+            <tr *ngFor="let obj of nftAllAuctionBidsdata">
+              <td *ngIf="
+                  obj.eBidStatus == 'Bid' ||
+                  obj.eBidStatus == 'Canceled' ||
+                  obj.eBidStatus == 'Accepted' ||
+                  obj.eBidStatus == 'Rejected'
+                ">
+                Auction
+              </td>
+              <td *ngIf="obj.eBidStatus == 'Sold'">Fixed Sale</td>
+              <td *ngIf="obj.eBidStatus == 'Transfer'">Transfer</td>
+              <!-- -->
+              <td>
+                {{
+                obj &&
+                obj.oBidder &&
+                obj.oBidder &&
+                obj.oBidder["sUserName"] != undefined
+                ? obj.oBidder["sUserName"]
+                : "---"
+                }}
+              </td>
+              <td>
+                {{
+                obj &&
+                obj.oRecipient &&
+                obj.oRecipient &&
+                obj.oRecipient["sUserName"] != undefined
+                ? obj.oRecipient["sUserName"]
+                : "---"
+                }}
+              </td>
+              <td>
+                {{
+                obj && obj.nQuantity && obj.nQuantity != undefined
+                ? obj.nQuantity
+                : 0
+                }}
+              </td>
+              <td>
+                {{
+                obj &&
+                obj.nBidPrice &&
+                obj.nBidPrice &&
+                obj.nBidPrice["$numberDecimal"] != undefined
+                ? obj.nBidPrice["$numberDecimal"]
+                : 0
+                }}
+                USDC
+              </td>
+              <td>
+               
+                {{
+                obj &&
+                obj.sTransactionHash &&
+                obj.sTransactionHash != undefined
+                ? (obj.sTransactionHash |slice: 0:10)
+                : 0
+                }}.... {{
+                  obj &&
+                  obj.sTransactionHash &&
+                  obj.sTransactionHash != undefined
+                  ? (obj.sTransactionHash |slice: -4)
+                  : 0
+                  }}
+              </td>
+              <td>
+                <div class="d-flex" *ngIf="
+                    obj.eBidStatus &&
+                    obj.eBidStatus == 'Bid' &&
+                    showObj.wallet_address == obj.oRecipient.sWalletAddress
+                  ">
+                  <a href="javascript:;" (click)="clickAccept(obj, nftERC721Type)"
+                    class="asset__btn custom_margin asset__btn--half asset__btn--clr open-modal">Accept</a>
+                  <a href="javascript:;" (click)="onClickRejectBid(obj.oBidder._id)"
+                    style="background: rgba(235, 87, 87, 0.25); color: #eb5757"
+                    class="asset__btn custom_margin asset__btn--half asset__btn--clr open-modal">Reject</a>
+                </div>
+                <div class="d-flex" *ngIf="
+                    obj.eBidStatus &&
+                    obj.eBidStatus == 'Bid' &&
+                    showObj.wallet_address == obj.oBidder.sWalletAddress
+                  ">
+                  <a href="javascript:;" (click)="onClickCancelBid()"
+                    class="asset__btn custom_margin asset__btn--full asset__btn--clr open-modal">Cancel Bid</a>
+                </div>
+                <div *ngIf="obj.eBidStatus && obj.eBidStatus != 'Bid'">
+                  {{
+                  obj &&
+                  obj.eBidStatus &&
+                  obj.eBidStatus != undefined &&
+                  obj.eBidStatus == "Transfer"
+                  ? "Transfered"
+                  : obj.eBidStatus
+                  }}
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="!nftAllAuctionBidsdata || !nftAllAuctionBidsdata.length">
+            <tr>
+              <td colspan="7" class="text-center">No records found.</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- end explore -->
+  </div>
+</main>
+
+<app-footer></app-footer>
+
+<div id="modal-bid" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Place a bid</h4>
+  <form name="bidForm" [formGroup]="bidForm">
+    <div class="sign__group sign__group--row" *ngIf="NFTData.erc721 === false">
+      <label class="sign__label" for="placebid">Editions</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keyup)="checkBuyQNT($event)" (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted1 && bidForm.controls.nQuantity.errors
+        }" formControlName="nQuantity" />
+      <div class="nft-err" *ngIf="submitted1 && bidForm.controls.nQuantity.errors">
+        <span *ngIf="bidForm.controls.nQuantity.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Price(USDC)</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (click)="clearInput($event)" (blur)="checkBidPrice($event)" [ngClass]="{
+          'is-invalid': submitted1 && bidForm.controls.nBidPrice.errors
+        }" formControlName="nBidPrice" />
+      <div class="nft-err" *ngIf="submitted1 && bidForm.controls.nBidPrice.errors">
+        <span *ngIf="bidForm.controls.nBidPrice.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span>
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitBID()">
+      Place a bid
+    </button>
+  </form>
+</div>
+
+
+<!-- Transfer Modal -->
+
+<div id="modal-tran" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">
+    Transfer {{ NFTData.sName ? NFTData.sName : "-" }}
+  </h4>
+  <form name="transferForm" [formGroup]="transferForm">
+    <div class="sign__group sign__group--row" *ngIf="NFTData.erc721==0">
+      <label class="sign__label" for="placebid">Editions</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keyup)="checkBuyQNTT($event)" (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted2 && transferForm.controls.nQuantity.errors
+        }" formControlName="nQuantity" />
+      <div class="nft-err" *ngIf="submitted2 && transferForm.controls.nQuantity.errors">
+        <span *ngIf="transferForm.controls.nQuantity.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label">Receiver Address</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        placeholder="Enter Wallet Address" [ngClass]="{
+        'is-invalid': submitted2 && transferForm.controls.oRecipient.errors
+      }" formControlName="oRecipient" />
+
+      <div class="nft-err" *ngIf="submitted2 && transferForm.controls.oRecipient.errors">
+        <span *ngIf="transferForm.controls.oRecipient.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitTransfer()">
+      Transfer
+    </button>
+  </form>
+</div>
+
+<!-- Buy now -->
+<div id="modal-buy" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Buy now</h4>
+  <form name="buyForm" [formGroup]="buyForm">
+    <div class="sign__group sign__group--row" *ngIf="NFTData.erc721 === false">
+      <label class="sign__label" for="placebid">Editions</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keyup)="checkBuyBQNT($event)" (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nQuantity.errors
+        }" formControlName="nQuantity" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nQuantity.errors">
+        <span *ngIf="buyForm.controls.nQuantity.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Price</label>
+      <input id="placebid" type="text" formControlName="nBidPrice" autocomplete="off" class="sign__input" value="{{
+          NFTOwnerData.nBasePrice &&
+          NFTOwnerData.nBasePrice != undefined &&
+          NFTOwnerData.nBasePrice['$numberDecimal'] != undefined
+            ? NFTOwnerData.nBasePrice['$numberDecimal']
+            : '-'
+        }}" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nBidPrice.errors
+        }" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nBidPrice.errors">
+        <span *ngIf="buyForm.controls.nBidPrice.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <!-- <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span> -->
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitBUY()">
+      Buy now
+    </button>
+  </form>
+</div>
+
+<!-- Hidden Content Modal -->
+<div id="modal-hidden-content" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Hidden Content</h4>
+  <form name="buyForm" [formGroup]="buyForm">
+    <div class="sign__group sign__group--row">
+
+
+
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        value="{{NFTData.hiddenContent}}" [ngClass]="{
+        'is-invalid': submitted3 && buyForm.controls.nQuantity.errors
+      }" />
+    </div>
+
+
+    <!-- <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span> -->
+
+
+  </form>
+</div>
+
+<!--Metamask Download popup-->
+
+<div id="metamaskModal" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Add Metamask Extension To your Browser</h4>
+  <form name="buyForm" [formGroup]="buyForm">
+    <div class="sign__group sign__group--row">
+
+
+
+      <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+        class="sign__input" style="cursor:pointer;"> <input id="placebid" autocomplete="off" type="text"
+          class="sign__input" autocomplete="off" style="cursor:pointer;"
+          value="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" [ngClass]="{
+        'is-invalid': submitted3 && buyForm.controls.nQuantity.errors
+      }" /></a>
+
+    </div>
+
+
+    <!-- <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span> -->
+
+
+  </form>
+
+
+
+
+
+</div>
+
+
+<!-- Buy now owner-->
+<div id="modal-buy-owner" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Buy now</h4>
+  <form name="buyForm" [formGroup]="buyForm">
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Editions</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keyup)="checkBuyBQNTOwner($event, currentOwnerQty)" (keypress)="priceValidation($event)" value="1" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nQuantity.errors
+        }" formControlName="nQuantity" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nQuantity.errors">
+        <span *ngIf="buyForm.controls.nQuantity.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Price(Matic)</label>
+      <input id="placebid" type="text" formControlName="nBidPrice" autocomplete="off" class="sign__input"
+        value="{{ currentOwnerPrice }}" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nBidPrice.errors
+        }" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nBidPrice.errors">
+        <span *ngIf="buyForm.controls.nBidPrice.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <!-- <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span> -->
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitBUY()">
+      Buy now
+    </button>
+  </form>
+</div>
+
+<!-- Put On Sale -->
+<div id="modal-sale" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Put On Marketplace</h4>
+  <form name="saleForm" [formGroup]="saleForm">
+    <div class="d-flex">
+      <div class="col-12 col-md-6 disable-text-selection">
+        <div class="sign__group sign__group--row">
+          <ul class="sign__radio">
+            <li (click)="onClickRadio('Fixed Sale')">
+              <input id="type1" type="radio" value="Fixed Sale" autocomplete="off" [ngClass]="{
+                  'is-invalid':
+                    submitted3 && saleForm.controls.eAuctionType.errors
+                }" formControlName="eAuctionType" />
+              <label for="type1">Fixed Sale</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 disable-text-selection">
+        <div class="sign__group sign__group--row">
+          <ul class="sign__radio">
+            <li (click)="onClickRadio('Auction')">
+              <input id="type2" type="radio" value="Auction" autocomplete="off" [ngClass]="{
+                  'is-invalid':
+                    submitted3 && saleForm.controls.eAuctionType.errors
+                }" formControlName="eAuctionType" />
+              <label for="type2">Open For Bids</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row" *ngIf="!tokenType">
+      <label class="sign__label" for="placebid">Editions</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keyup)="checkBuyBQNTPutOnSale($event)" (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nQuantity.errors
+        }" formControlName="nQuantity" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nQuantity.errors">
+        <span *ngIf="buyForm.controls.nQuantity.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" *ngIf="saleType =='Auction'" for="placebid">Price(USDC)</label>
+      <label class="sign__label" *ngIf="saleType =='Fixed Sale'" for="placebid">Price(Matic)</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted3 && buyForm.controls.nBidPrice.errors
+        }" formControlName="orderPrice" />
+      <div class="nft-err" *ngIf="submitted3 && buyForm.controls.nBidPrice.errors">
+        <span *ngIf="buyForm.controls.nBidPrice.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <!-- <span class="sign__text sign__text--small">This Bid can Finalize by Owner.</span> -->
+
+    <button class="sign__btn" type="button" (click)="onClickUpdateType('Fixed Sale', NFTData._id)">
+      Put On marketplace
+    </button>
+  </form>
+</div>
+
+<!-- Transfer Modal -->
+
+
+
+<!-- <-------------->
+<div id="modal-change-price" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Edit price</h4>
+  <form name="changePriceForm" [formGroup]="changePriceForm">
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Price</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off"
+        (keypress)="priceValidation($event)" [ngClass]="{
+          'is-invalid': submitted4 && changePriceForm.controls.nBasePrice.errors
+        }" formControlName="nBasePrice" />
+      <div class="nft-err" *ngIf="submitted4 && changePriceForm.controls.nBasePrice.errors">
+        <span *ngIf="changePriceForm.controls.nBasePrice.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitChangePrice()">
+      Update Price
+    </button>
+  </form>
+</div>
+
+<div id="modal-auction" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Put on Auction</h4>
+  <form name="timedAuctionForm" [formGroup]="timedAuctionForm">
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">TYPE</label>
+      <input id="placebid" autocomplete="off" type="text" class="sign__input" autocomplete="off" disable [ngClass]="{
+          'is-invalid': submitted5 && timedAuctionForm.controls.type.errors
+        }" formControlName="type" />
+      <div class="nft-err" *ngIf="submitted5 && timedAuctionForm.controls.type.errors">
+        <span *ngIf="timedAuctionForm.controls.type.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <div class="sign__group sign__group--row">
+      <label class="sign__label" for="placebid">Time</label>
+      <select id="royalties" name="royalties" class="sign__select" autocomplete="off" [ngClass]="{
+          'is-invalid': submitted5 && timedAuctionForm.controls.days.errors
+        }" formControlName="days">
+        <option value="">Select time</option>
+
+        <option value="1">1 day</option>
+        <option value="2">2 day</option>
+        <option value="3">3 day</option>
+        <option value="4">4 day</option>
+        <option value="5">5 day</option>
+      </select>
+      <div class="nft-err" *ngIf="submitted5 && timedAuctionForm.controls.days.errors">
+        <span *ngIf="timedAuctionForm.controls.days.errors?.required">This field is required.</span>
+      </div>
+    </div>
+
+    <button class="sign__btn" type="button" (click)="onClickSubmitPutonTimeAuction()">
+      Put on Auction
+    </button>
+  </form>
+</div>
+
+<div id="modal-add-funds" class="zoom-anim-dialog mfp-hide modal modal--form">
+  <button class="modal__close" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+    </svg>
+  </button>
+
+  <h4 class="sign__title">Add funds</h4>
+  <p></p>
+  <iframe src="https://buy.moonpay.com/?apiKey=sk_test_UsZNUjejK7PBBJrZ7xvoxZY2ShAKI2t9&defaultCurrencyCode=bnb"
+    allow="accelerometer; autoplay; camera; gyroscope; payment" width="350px" height="510px" frameborder="0">
+  </iframe>
+</div>
+
+<div *ngIf="isShowPopup" class="popup-bg" id="PutOnMarketPlacePopup">
+  <div class="popup-box">
+    <div class="row">
+      <h2 class="col-12 d-flex justify-content-center">Follow Steps</h2>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isApprovePopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Approve</h5>
+        <span class="popupText">This transaction is conducted only once per collection</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isSignaturePopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Signature</h5>
+        <span class="popupText">Waiting for Sign to NFT</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isPutOnSalePopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Put on marketplace</h5>
+        <span class="popupText">Sign message to set fixed price</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <button (click)="closePopup()" [disabled]="isEnablePopup"
+        class="asset__btn asset__btn--full asset__btn--clr author__follow fullwidth mt-2">Close</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isShowPopupCancel" class="popup-bg" id="RemoveOnMarketPlacePopup">
+  <div class="popup-box">
+    <div class="row">
+      <h2 class="col-12 d-flex justify-content-center">Follow Steps</h2>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isCancelPopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Cancel</h5>
+        <span class="popupText">Cancelling NFT from Marketplace</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isRemovePopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Remove</h5>
+        <span class="popupText">Removing NFT from Marketplace </span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <button (click)="closePopup()" [disabled]="isEnablePopupCancel"
+        class="asset__btn asset__btn--full asset__btn--clr author__follow fullwidth mt-2">Close</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isShowBuyNFTPopup" class="popup-bg" id="ShowBuyNFTPopup">
+  <div class="popup-box">
+    <div class="row">
+      <h2 class="col-12 d-flex justify-content-center">Follow Steps</h2>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isBuyNFTCreateOrder }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Payment</h5>
+        <span class="popupText">Creating Payment for NFT Order</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isBuyNFTCompletedPopupClass }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Transfer</h5>
+        <span class="popupText">Transferring NFT to User Account</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <button (click)="closePopup()" [disabled]="isBuyNFTEnablePopup"
+        class="asset__btn asset__btn--full asset__btn--clr author__follow fullwidth mt-2">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isShowBidNFTPopup" class="popup-bg" id="ShowBidNFTPopup">
+  <div class="popup-box">
+    <div class="row">
+      <h2 class="col-12 d-flex justify-content-center">Follow Steps</h2>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isBidNFTSign }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Sign</h5>
+        <span class="popupText">Creating Sign for NFT Order</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isBidNFTApprove }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Approve</h5>
+        <span class="popupText">Checking for Approval for NFT Order</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isBidNFTCreateBid }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Create Bid</h5>
+        <span class="popupText">Creating Bid for NFT Order</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <button (click)="closePopup()" [disabled]="isBidNFTEnablePopup"
+        class="asset__btn asset__btn--full asset__btn--clr author__follow fullwidth mt-2">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isShowAcceptBidNFTPopup" class="popup-bg" id="ShowAcceptBidNFTPopup">
+  <div class="popup-box">
+    <div class="row">
+      <h2 class="col-12 d-flex justify-content-center">Follow Steps</h2>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isAcceptBidNFTCompleteOrder }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Complete Order</h5>
+        <span class="popupText">Processing Order for NFT</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <div class="col-3 icontxtDisplayPopup">
+        <div class="{{ isAcceptBidNFTCreateBid }}"></div>
+      </div>
+      <div class="col-8 icontxtDisplayPopup">
+        <h5 class="popupHeading">Complete</h5>
+        <span class="popupText">Transferring NFT to User Account</span>
+      </div>
+    </div>
+    <div class="row customDisplayPopup">
+      <button (click)="closePopup()" [disabled]="isAcceptBidNFTEnablePopup"
+        class="asset__btn asset__btn--full asset__btn--clr author__follow fullwidth mt-2">Close</button>
+    </div>
+  </div>
+</div>

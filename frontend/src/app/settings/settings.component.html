@@ -1,0 +1,363 @@
+<app-header></app-header>
+
+<main class="main">
+  <div class="main__author"></div>
+  <div class="container">
+    <div class="row row--grid">
+      <div class="col-12 col-xl-3">
+        <div class="author author--page">
+          <div class="author__meta">
+            <a
+              href="javascript:;"
+              class="author__avatar author__avatar--verified"
+            >
+              <img class="author-img"
+                src="{{
+                  profileData && profileData.sProfilePicUrl
+                    ? profileData.sProfilePicUrl
+                    : ''
+                }}"
+                alt=""
+              />
+            </a>
+            <h1 class="author__name">
+              <a href="javascript:;"
+                >{{
+                  profileData && profileData.sFirstname
+                    ? profileData.sFirstname
+                    : ""
+                }}
+                {{
+                  profileData && profileData.sLastname
+                    ? profileData.sLastname
+                    : ""
+                }}</a
+              >
+            </h1>
+            <h2 class="author__nickname">
+              <a href="javascript:;">
+                {{
+                  profileData && profileData.sUserName
+                    ? profileData.sUserName
+                    : ""
+                }}</a
+              >
+            </h2>
+            <p class="author__text">
+              {{ profileData && profileData.sBio ? profileData.sBio : "" }}
+            </p>
+            <div class="author__code">
+              <input
+                type="text"
+                value="{{
+                  profileData && profileData.sWalletAddress
+                    ? profileData.sWalletAddress
+                    : ''
+                }}"
+                id="author-code"
+              />
+              <button type="button">
+                <span>Copied</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M18,19H6a3,3,0,0,1-3-3V8A1,1,0,0,0,1,8v8a5,5,0,0,0,5,5H18a1,1,0,0,0,0-2Zm5-9.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19l-.09,0L16.06,3H8A3,3,0,0,0,5,6v8a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V10S23,10,23,9.94ZM17,6.41,19.59,9H18a1,1,0,0,1-1-1ZM21,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V6A1,1,0,0,1,8,5h7V8a3,3,0,0,0,3,3h3Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <a href="javascript:;" class="author__link" style="font-size: 10px !important;"
+              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M21.41,8.64s0,0,0-.05a10,10,0,0,0-18.78,0s0,0,0,.05a9.86,9.86,0,0,0,0,6.72s0,0,0,.05a10,10,0,0,0,18.78,0s0,0,0-.05a9.86,9.86,0,0,0,0-6.72ZM4.26,14a7.82,7.82,0,0,1,0-4H6.12a16.73,16.73,0,0,0,0,4Zm.82,2h1.4a12.15,12.15,0,0,0,1,2.57A8,8,0,0,1,5.08,16Zm1.4-8H5.08A8,8,0,0,1,7.45,5.43,12.15,12.15,0,0,0,6.48,8ZM11,19.7A6.34,6.34,0,0,1,8.57,16H11ZM11,14H8.14a14.36,14.36,0,0,1,0-4H11Zm0-6H8.57A6.34,6.34,0,0,1,11,4.3Zm7.92,0h-1.4a12.15,12.15,0,0,0-1-2.57A8,8,0,0,1,18.92,8ZM13,4.3A6.34,6.34,0,0,1,15.43,8H13Zm0,15.4V16h2.43A6.34,6.34,0,0,1,13,19.7ZM15.86,14H13V10h2.86a14.36,14.36,0,0,1,0,4Zm.69,4.57a12.15,12.15,0,0,0,1-2.57h1.4A8,8,0,0,1,16.55,18.57ZM19.74,14H17.88A16.16,16.16,0,0,0,18,12a16.28,16.28,0,0,0-.12-2h1.86a7.82,7.82,0,0,1,0,4Z"
+                />
+              </svg>
+              {{
+                profileData && profileData.sEmail
+                  ? profileData.sEmail
+                  : "@email"
+              }}</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-xl-9">
+        <!-- content tabs -->
+        <div class="profile-content">
+          
+
+          <!-- Profile -->
+          <div class="profile-tab-pane">
+            <div class="row row--grid">
+              <!-- details form -->
+              <div class="col-12 col-lg-12 text-align-center">
+                <form
+                  action="#"
+                  class="sign__form sign__form--profile"
+                  name="editProfileform"
+                  [formGroup]="editProfileform"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="sign__title pull-left">Profile details</h4>
+                      <a class="public_view_link pull-right" href="javascript:;" routerLink="/artist/{{ 
+                        profileData && 
+                        profileData.sUserName != '' && 
+                        profileData.sUserName ? profileData.sUserName : profileData._id }}">Public View</a>
+                    </div>
+
+                    <!-- <div class="col-12">
+                                        
+                                        </div> -->
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                      <div class="sign__group">
+                        <label class="sign__label" 
+                          >Upload Image</label
+                        >
+                        <div class="sign__file">
+                          <label id="file1" for="sign__file-upload"
+                            >{{this.filename || "e. g. Image 180x180"}}</label
+                          >
+                          <input
+                            data-name="#file1"
+                            id="sign__file-upload"
+                            (change)="onSelectDocument($event)"
+                            name="file"
+                            class="sign__file-upload"
+                            type="file"
+                            accept="video/mp4,video/x-m4v,video/*,.png,.jpg,.jpeg"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                      <div class="sign__group">
+                        <label class="sign__label" for="firstname"
+                          >First name</label
+                        >
+                        <input
+                          type="text"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sFirstname.errors
+                          }"
+                          formControlName="sFirstname"
+                          class="sign__input"
+                          placeholder="Enter your first name"
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 &&
+                            editProfileform.controls.sFirstname.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sFirstname.errors
+                                ?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                      <div class="sign__group">
+                        <label class="sign__label" for="lastname"
+                          >Last name</label
+                        >
+                        <input
+                          type="text"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sLastname.errors
+                          }"
+                          formControlName="sLastname"
+                          class="sign__input"
+                          placeholder="Enter your last name"
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 &&
+                            editProfileform.controls.sLastname.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sLastname.errors
+                                ?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                      <div class="sign__group">
+                        <label class="sign__label" for="username"
+                          >Username</label
+                        >
+                        <input
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sUserName.errors
+                          }"
+                          formControlName="sUserName"
+                          type="text"
+                          name="username"
+                          class="sign__input"
+                          placeholder="Enter your username"
+                          (keypress)="keyPressUserName($event)"
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 &&
+                            editProfileform.controls.sUserName.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sUserName.errors
+                                ?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                      <div class="sign__group">
+                        <label class="sign__label" for="email">Email</label>
+                        <input
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sEmail.errors
+                          }"
+                          formControlName="sEmail"
+                          type="email"
+                          class="sign__input"
+                          placeholder="Enter your email"
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 && editProfileform.controls.sEmail.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sEmail.errors?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-12">
+                      <div class="sign__group">
+                        <label class="sign__label" for="email"
+                          >Wallet address</label
+                        >
+                        <input
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sWalletAddress.errors
+                          }"
+                          formControlName="sWalletAddress"
+                          type="text"
+                          class="sign__input"
+                          placeholder="Enter your Wallet address"
+                          readonly
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 &&
+                            editProfileform.controls.sWalletAddress.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sWalletAddress.errors
+                                ?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-12">
+                      <div class="sign__group">
+                        <label class="sign__label" for="email">Website</label>
+                        <input
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted1 &&
+                              editProfileform.controls.sWebsite.errors
+                          }"
+                          formControlName="sWebsite"
+                          type="text"
+                          class="sign__input"
+                          placeholder="Enter your Website"
+                        />
+                        <div
+                          class="nft-err"
+                          *ngIf="
+                            submitted1 &&
+                            editProfileform.controls.sWebsite.errors
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              editProfileform.controls.sWebsite.errors?.required
+                            "
+                            >This field is required.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-12">
+                      <div class="sign__group">
+                        <label class="sign__label" for="email">Bio</label>
+                        <input
+                          formControlName="sBio"
+                          type="text"
+                          class="sign__input"
+                          placeholder="Enter your Bio"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button
+                        class="sign__btn"
+                        type="button"
+                        (click)="onClickSubmit()"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        <!-- end content tabs -->
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

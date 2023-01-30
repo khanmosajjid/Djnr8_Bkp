@@ -1,0 +1,229 @@
+<header class="header">
+    <div class="header__content">
+        <div class="header__logo">
+            <a href="javascript:;" routerLink="/">
+                <img src="../../assets/icon/favicon.png" srcset="../../assets/icon/favicon.png 1024w,
+                ../../assets/icon/favicon.png 720w,
+                ../../assets/icon/favicon.png 640w,
+                ../../assets/icon/favicon.png 320w" class="logo-img" alt="">
+            </a>
+        </div>
+
+        <!--<form action="#" class="header__search">
+            <input type="text" placeholder="Search JENR8" routerLink="/marketplace" (keyup)="onkeyUp($event)">
+            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+                </svg></button>
+            <button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+                </svg></button>
+        </form>-->
+
+        <div [ngClass]="headerMenuClass">
+            <ul class="header__nav">
+
+                <li class="header__nav-item">
+                    <a class="header__nav-link" routerLink="" routerLinkActive="active" role="button" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">HOME</a>
+                </li>
+                <!-- <li class="header__nav-item">
+                    <a class="header__nav-link"  routerLink="/dashboard/index" routerLinkActive="active" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create NFT</a>
+                </li> -->
+                <li class="header__nav-item">
+                    <a class="header__nav-link" routerLink="/marketplace" routerLinkActive="active" 
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EXPLORE</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" routerLink="/artists" routerLinkActive="active" 
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ARTISTS</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" routerLink="/faq" routerLinkActive="active" 
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >FAQ</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link hide-desk" routerLink="/create" routerLinkActive="active" 
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Create</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link discordLink" href="https://discord.gg/DN2mWe852J"  target="_blank">
+                        <svg viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M11.5507 0.0036464H11.5624L11.5612 0L11.5507 0.0036464ZM11.5108 0.0176323L11.5507 0.0036464H11.5252L11.5108 0.0176323ZM11.5039 0.0243315L11.5108 0.0176323L11.4917 0.0243072L11.5039 0.0243315ZM11.5039 0.0243315L11.2748 0.246719C13.8446 0.975936 15.088 2.11473 15.088 2.11473C13.4318 1.30287 11.9393 0.896938 10.4467 0.732864C9.36818 0.56879 8.28967 0.65508 7.37851 0.732864H7.13058C6.54793 0.732864 5.30826 0.975936 3.64711 1.62616C3.06818 1.87287 2.73595 2.03452 2.73595 2.03452C2.73595 2.03452 3.9781 0.816724 6.71529 0.166505L6.54793 0.00243113C6.54793 0.00243113 4.47521 -0.075352 2.2376 1.54594C2.2376 1.54594 0 5.36704 0 10.0778C0 10.0778 1.23967 12.1925 4.64008 12.2727C4.64008 12.2727 5.13595 11.6249 5.63802 11.0549C3.72893 10.4861 2.98512 9.34857 2.98512 9.34857C2.98512 9.34857 3.15124 9.42878 3.40041 9.59164H3.47479C3.50979 9.59164 3.52722 9.60778 3.54568 9.62487C3.54684 9.62595 3.548 9.62702 3.54917 9.6281V9.63539C3.56901 9.65484 3.58636 9.67185 3.62355 9.67185C3.6596 9.68642 3.69564 9.70096 3.73164 9.71548C4.10416 9.8658 4.47123 10.0139 4.77645 10.158C5.35413 10.4035 6.09669 10.6478 7.00785 10.8094C8.16074 10.9735 9.48223 11.0525 10.9872 10.8094L11.0353 10.7988L11.0353 10.7988C11.7631 10.6384 12.4908 10.4779 13.2186 10.1592C13.3516 10.0923 13.4931 10.0255 13.6419 9.95511C14.0339 9.76978 14.4769 9.56038 14.9504 9.26349C14.9504 9.26349 14.2066 10.4011 12.2169 10.9699C12.626 11.5362 13.2025 12.1852 13.2025 12.1852C15.9898 12.1255 17.3804 10.6948 17.8328 10.2295C17.9325 10.1269 17.9866 10.0713 18 10.0875C18 5.38405 15.75 1.55566 15.75 1.55566C13.7464 0.097178 11.8701 0.0257804 11.5039 0.0243315ZM6.13886 5.36701C7.00663 5.36701 7.70828 6.09623 7.70828 6.98952C7.70828 7.88889 7.00167 8.61811 6.1339 8.61811C5.26613 8.61811 4.55952 7.88889 4.55952 6.99682C4.55952 6.09745 5.26613 5.37066 6.1339 5.37066L6.13886 5.36701ZM11.7707 5.36701C12.6422 5.36701 13.3451 6.09623 13.3451 6.98952C13.3451 7.88889 12.6384 8.61811 11.7707 8.61811C10.9029 8.61811 10.1963 7.88889 10.1963 6.99682C10.1988 6.09745 10.9066 5.37066 11.7707 5.37066V5.36701Z">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+                <!-- <li class="header__nav-item">
+                    <a class="header__nav-link" routerLink="/create" routerLinkActive="active" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
+                </li> -->
+            </ul>
+        </div>
+
+        <div class="header__actions">
+            <!--<div class="header__action header__action--search">
+                <button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+                    </svg></button>
+            </div>-->
+            <div class="header__action header__action--signin" *ngIf="userStatus=='active'">
+                <!-- <a href="javascript:;" routerLink="/create"  class=" home__btn" style="margin: 0 20px 0 0 ; height: 40px;min-width:100px;">I don't have a wallet</a> -->
+
+                <a class="header__action-btn header__action-btn--signin" href="javascript:; " routerLink="/create" style="background-color: #01ff95;  border: 1px solid #ffff;color: black !important">
+                    <span style="color: black !important">Create</span>
+
+                </a>
+
+
+
+
+            </div>
+            <div class="header__action header__action--signin" *ngIf="userStatus=='blocked'">
+                <!-- <a href="javascript:;" routerLink="/create"  class=" home__btn" style="margin: 0 20px 0 0 ; height: 40px;min-width:100px;">I don't have a wallet</a> -->
+
+                <a class="header__action-btn header__action-btn--signin" href="javascript:; " (click)="userBlocked()" style="background-color: #01ff95;color: black !important">
+                    <span style="color: black !important">Create</span>
+
+                </a>
+
+
+
+
+            </div>
+            <div class="header__action header__action--signin" *ngIf="userStatus=='deactivated'">
+
+
+                <a class="header__action-btn header__action-btn--signin" href="javascript:; " (click)="userDeactivated()"
+                    style="background-color: #01ff95;">
+                    <span style="color: black !important">Create</span>
+
+                </a>
+
+
+
+
+            </div>
+            <div class="header__action header__action--profile" *ngIf="showObj.show == 'profile'">
+                <a (click)="clickOP(type)" class="header__profile-btn header__profile-btn--verified" href="javascript:;" 
+                role="button" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{
+                  profileData && profileData.sProfilePicUrl
+                    ? profileData.sProfilePicUrl
+                    : ''
+                }}" alt="" />
+                    <div>
+                        <p>{{ profileData && profileData.sFirstname? profileData.sFirstname: 'Test net'}}</p>
+                        <span>{{showObj.wallet_address| slice:0:6}}...{{showObj.wallet_address| slice:-4}}</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z">
+                        </path>
+                    </svg>
+                </a>
+
+
+
+                <ul class="dropdown-menu header__profile-menu" [ngClass]="{'show': type === 'show'}" aria-labelledby="dropdownMenuProfile">
+                    <li>
+                        <a href="javascript:;" routerLink="/settings">
+                            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.405 3.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 01-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 01.872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 012.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 012.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 01.872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 01-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 01-2.105-.872l-.1-.34zM10 12.93a2.929 2.929 0 100-5.858 2.929 2.929 0 000 5.858z" clip-rule="evenodd"/>
+                            </svg>
+
+                            <span>Settings</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" (click)="clicktoProfile()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
+                            </svg>
+
+                            <span>Profile</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" routerLink="/my-collections"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1,1,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z" />
+                            </svg> <span>My Albums</span>
+                        </a>
+                    </li>
+                    <li>
+                        <!-- <a href="javascript:;" (click)="clicktoEarnings()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M19,7H18V6a3,3,0,0,0-3-3H5A3,3,0,0,0,2,6H2V18a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V10A3,3,0,0,0,19,7ZM5,5H15a1,1,0,0,1,1,1V7H5A1,1,0,0,1,5,5ZM20,15H19a1,1,0,0,1,0-2h1Zm0-4H19a3,3,0,0,0,0,6h1v1a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8.83A3,3,0,0,0,5,9H19a1,1,0,0,1,1,1Z" />
+                            </svg>
+                            <span>My Earnings</span></a> -->
+                    </li>
+                    <li>
+                        <a href="javascript:;" routerLink="/marketplace"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1,1,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z" />
+                            </svg> <span>Marketplace</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" routerLink="/create"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M10,13H4a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V14A1,1,0,0,0,10,13ZM9,19H5V15H9ZM20,3H14a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V4A1,1,0,0,0,20,3ZM19,9H15V5h4Zm1,7H18V14a1,1,0,0,0-2,0v2H14a1,1,0,0,0,0,2h2v2a1,1,0,0,0,2,0V18h2a1,1,0,0,0,0-2ZM10,3H4A1,1,0,0,0,3,4v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V4A1,1,0,0,0,10,3ZM9,9H5V5H9Z" />
+                            </svg> <span>Create</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" (click)="onsignout()"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z" />
+                            </svg> <span>Sign out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="header__action header__action--signin">
+                <!-- <a href="javascript:;" routerLink="/create"  class=" home__btn" style="margin: 0 20px 0 0 ; height: 40px;min-width:100px;">I don't have a wallet</a> -->
+                <a class="header__action-btn header__action-btn--signin" href="javascript:;" style="  border: 1px solid #ffff;; background-color: transparent;" (click)="connectToMetaMask()" *ngIf="showObj.show == 'metamask'">
+                    <span>Connect</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
+                    </svg>
+                </a>
+                <a class="header__action-btn header__action-btn--signin" href="javascript:;" style="  border: 1px solid #ffff;; background-color: transparent;" (click)="signinMetaMask()" *ngIf="showObj.show == 'signin'">
+                    <span>Sign In</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
+                    </svg>
+                </a>
+                <a class="header__action-btn header__action-btn--signin" href="javascript:;" style="  border: 1px solid #ffff;; background-color: transparent;" (click)="signupMetaMask()" *ngIf="showObj.show == 'signup'">
+                    <span>Sign Up</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
+                    </svg>
+                </a>
+
+            </div>
+
+        </div> 
+
+        <button type="button" (click)="toggleHeaderMenu()"  
+        class="header__btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>

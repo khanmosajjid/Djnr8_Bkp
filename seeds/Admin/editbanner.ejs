@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- xhtml/index.html08:17:22 -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Edit Banners | Djenerates </title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="./../../assets/images/favicon/favicon.png">
+
+
+    <link rel="stylesheet" href="../../assets/vendor/summernote/summernote.css">
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+
+    <!-- <link href="../../assets/css/style.css" rel="stylesheet"> -->
+    <link href="../../assets/css/admin-style.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!-- Include Header -->
+        <%- include('headerEdit'); -%>
+
+            <!-- Include Sidebar -->
+            <%- include('editSidebar'); -%>
+
+                <!--**********************************
+            Content body start
+        ***********************************-->
+                <div class="content-body">
+                    <!-- row -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-12 col-xxl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Edit Banners</h4>
+                                    </div>
+                                    <form method="post" enctype="multipart/form-data" id="updateBannerForm">
+                                        <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label>Banner Image Desktop(Recomended size 400x1900px)*</label>
+                                                <input type="file" accept="image/png, image/jpeg, image/jpg"  class="form-control mb-3" name="banner_image_desktop" id="banner-img-desktop" onchange="CheckDimensionDesktop()" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Banner Image Mobile(Recomended size 200x400px)*</label>
+                                                <input type="file" accept="image/png, image/jpeg, image/jpg"  class="form-control mb-3" name="banner_image_mobile" id="banner-img-mobile" onchange="CheckDimensionMobile()" required />
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label>Banner Heading*</label>
+                                                <input type="text" class="form-control mb-3" name="bHeading"
+                                                    id="banner_heading" required />
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <label>Banner Sub Heading*</label>
+                                                <input type="text" class="form-control mb-3" name="bSubHeading" value=""
+                                                    id="banner_sub_heading" required />
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label>Banner Collection Address*</label>
+                                                <input type="text" class="form-control mb-3" name="bannerURL" value=""
+                                                    id="banner_collection_address" required />
+                                            </div>
+                                            <!-- <div class="form-group">
+                                        <h5 class="text-left mt-4">Button One</h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_one_txt" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Link</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_one_link" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Class Name</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_one_cls" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5 class="text-left mt-4">Button Two</h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_two_txt" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Link</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_two_link" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Class Name</label>
+                                                    <input type="text" class="form-control mb-3" name="banner_btn_two_cls" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                            <button type="submit" class="btn btn-primary btn-lg"
+                                                data-loading-text="<i class='fa fa-circle-o-notch fa-spin '></i> Processing"
+                                                data-normal-text="Update" type="button">Edit Banner</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .card -->
+                </div>
+                <!-- .container -->
+    </div>
+    </div>
+    </div>
+
+    <!--**********************************
+            Content body end
+        ***********************************-->
+
+    <!--**********************************
+            Footer start
+        ***********************************-->
+
+    <%- include('footer'); -%>
+
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        </div>
+        <!--**********************************
+        Main wrapper end 
+    ***********************************-->updateBannerForm ***********************************-->
+        <!-- Required vendors -->
+
+        <script src="../../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+        <script src="../../assets/js/custom.min.js"></script>
+        <script src="../../assets/js/deznav-init.js"></script>
+        <script src="../../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+        <script src="../../assets/vendor/peity/jquery.peity.min.js"></script>
+
+        <script src="../../Admin/js/banners.js"></script>
+        <script type="text/javascript">
+            let bannerData;
+            let img_src;
+
+
+
+            function getBannerToEdit(a) {
+                console.log("get banner edit",a)
+                //let oOptions = { sObjectId: a.attr("objId") }
+                let oOptions={
+                    sObjectId: a
+                }
+                console.log("object id is----->",oOptions)
+                $.ajax({
+                    type: "POST",
+                    url: "/api/v1/admin/getSingleBanner",
+                    data: oOptions,
+                    headers: {
+                        'Authorization': token
+                    },
+                    success: function(result,status,xhr) {
+                        console.log(xhr);
+
+                        console.log("result for get single banner",result)
+                        bannerData=result;
+
+                        img_src="https://ipfs.infura.io/ipfs/"+bannerData.data.bFileHash;
+
+                        $(".bannerimage").attr("src",img_src);
+                        $("#banner_heading").attr("value",bannerData.data.bHeading);
+                        $("#banner_sub_heading").attr("value",bannerData.data.bSubHeading)
+
+                        toastr["success"](xhr.responseJSON.message);
+                    },
+                    error: function(xhr,status,error) {
+                        toastr["error"](error);
+                        console.log(error);
+                    }
+                });
+            }
+
+            let bId=window.location.href.split("/");
+
+
+            console.log(bId[5]);
+
+            getBannerToEdit(bId[5]);
+
+            $('#updateBannerForm').on('submit',(function(e) {
+                e.preventDefault();
+                console.log("update function called")
+
+                let banner_image=$("#banner_image")
+                //console.log("banner image is-->",banner_image)
+                let bHeading=$("#bHeading").val()
+
+
+                // let data = {
+                //     sObjectId: bId[5],
+
+
+                //     banner_image:$("#banner_image").val(),
+                //     bannerURL: $("#bannerURL").val()
+
+                // };
+
+                bannerURL=$("#banner_collection_address").val()
+                console.log("banner url is--->",bannerURL)
+                var formData=new FormData();
+                formData.append('bannerURL',bannerURL);
+                formData.append('sObjectId',bId[5])
+
+                // Attach file
+                console.log("banner image-->",$('#banner-img-desktop[type=file]')[0].files[0])
+                formData.append('banner_image_desktop',$('#banner-img-desktop[type=file]')[0].files[0]);
+                formData.append('banner_image_mobile',$('#banner-img-mobile[type=file]')[0].files[0]);
+
+
+              
+
+           
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/v1/admin/updateSingleBanner",
+                    "headers": {
+                        "Authorization": token
+                    },
+                    // dataType: "json",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: function(result,status,xhr) {
+                        console.log("Response",result);
+                         toastr["success"](xhr.responseJSON.message);
+                         setTimeout(() => {
+                             location.reload();
+                         }, 1000);
+                    },
+                    error: function(xhr,status,error) {
+                        console.log("Error",error);
+                        // toastr["error"](xhr.responseJSON.message);
+
+                    }
+                });
+            }));
+        </script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</body>
+
+
+
+</html>

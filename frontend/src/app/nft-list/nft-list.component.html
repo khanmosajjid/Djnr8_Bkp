@@ -1,0 +1,431 @@
+<app-header></app-header>
+<main class="main">
+  <div class="container">
+    <div class="row row--grid">
+      <!-- breadcrumb -->
+      <div class="col-12">
+        <ul class="breadcrumb">
+          <li class="breadcrumb__item">
+            <a href="javascript:;" routerLink="">Home</a>
+          </li>
+          <li class="breadcrumb__item breadcrumb__item--active">Explore</li>
+        </ul>
+      </div>
+      <!-- end breadcrumb -->
+
+      <!-- title -->
+      <div class="col-12">
+        <div class="main__title main__title--page">
+          <h1>Explore New Music</h1>
+        </div>
+      </div>
+      <!-- end title -->
+    </div>
+
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-12 col-xl-3 order-xl-2">
+        <div class="filter-wrap">
+          <button
+            class="filter-wrap__btn"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseFilter"
+            aria-expanded="false"
+            aria-controls="collapseFilter"
+          >
+            Open filter
+          </button>
+
+          <div class="collapse filter-wrap__content" id="collapseFilter">
+            <!-- filter -->
+            <div class="filter">
+              <div class="filter__group">
+                <label class="filter__label pt-3">Keyword:</label>
+                <input
+                  type="text"
+                  class="filter__input"
+                  autofocus
+                  placeholder="Keyword"
+                  (keyup)="onkeyUp($event)"
+                />
+              </div>
+              <h4 class="filter__title">
+                Filters
+                <button type="button" (click)="clickClearAll()">
+                  Clear All
+                </button>
+              </h4>
+              <div class="filter-keywords">
+             
+                 
+                  <div class="filter-collection">
+                    <ul class="genre__checkboxes with50" *ngFor="let datatest of Datatest; let i = index">
+                    
+                        <li class="listGenre">
+                          <input
+                          
+                            id="{{datatest.value}}"
+                            type="checkbox"
+                            name="{{datatest.valuse}}"
+                            [value]="datatest.value"
+                            (click)="onCheckboxChange1($event)"
+                          />
+                          <label class="genre__label  disable-text-selection" for="{{datatest.value}}"  [style.background-color]=" genreList.indexOf(datatest.value) != -1 ? '#01ff95' : '#222227'" >{{datatest.value}}</label>
+                        </li>
+                  
+                    </ul>
+                </div>
+                  
+           
+              </div>
+              <!-- bpm from -to  -->
+              <label class="filter__label">BPM:</label>
+              <div class="d-flex row_full "  >
+                <div class="width_100">
+                  <input
+                    type="text"
+                    class="bpm__input"
+                    (keyup)="onkeyFrom($event)"
+                    placeholder="from"
+                  />
+              </div>
+              <span class="p-2 " style="color: white">-</span>
+              <div class="width_100">
+                
+                    <input
+                      type="text"
+                      class="bpm__input"
+                      (keyup)="onkeyTo($event)"
+                      placeholder="to"
+                    />
+                </div>
+              </div>
+
+
+            
+
+              <div class="filter__group" style="margin-top:1rem !important;">
+                <label for="sort" class="filter__label">Category:</label>
+
+                <div class="filter__select-wrap">
+                  <select
+                    name="sort"
+                    id="sort"
+                    class="filter__select"
+                    (change)="onSelectCategory($event)"
+                  >
+                    <option value="All">Select One</option>
+                    <option value="Video">Video</option>
+                    <option value="Audio">Audio</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter__group">
+                <label class="filter__label">:</label>
+                <ul class="filter__checkboxes d-flex disable-text-selection">
+                  <li>
+                    <input
+                      id="type7"
+                      type="radio"
+                      name="type5"
+                      value="All"
+                      (click)="onClickTypeSearch('')"
+                    />
+                    <label for="type7">All&nbsp;&nbsp;&nbsp;</label>
+                  </li>
+                  <li>
+                    <input
+                      id="type5"
+                      type="radio"
+                      name="type5"
+                      value="Auction"
+                      (click)="onClickTypeSearch('Auction')"
+                    />
+                    <label for="type5">Auction&nbsp;&nbsp;&nbsp;</label>
+                  </li>
+                  <li class="px-2">
+                    <input
+                      class=""
+                      id="type6"
+                      type="radio"
+                      name="type5"
+                      value="Fixed Sale"
+                      (click)="onClickTypeSearch('Fixed Sale')"
+                    />
+                    <label for="type6">Sale</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- end filter -->
+          </div>
+        </div>
+      </div>
+      <!-- end sidebar -->
+
+      <!-- content -->
+      <div class="col-12 col-xl-9 order-xl-1">
+        <div class="row row--grid">
+          <ng-container *ngIf="NFTListData && NFTListData.length">
+            <div
+              class="col-12 col-sm-6 col-lg-4"
+              *ngFor="let obj of NFTListData"
+            >
+              <!-- card -->
+              <div class="card audio__card" > 
+                <div class="card__cover">
+                  <a href="javascript:;" routerLink="/NFT-detail/{{
+                    obj._id && obj._id != undefined ? obj._id : '-'
+                  }}">
+                    <img class="sty img-fluid" *ngIf="
+                        obj.eType &&
+                        obj.eType != undefined &&
+                        obj.eType != 'Audio' &&
+                        obj.eType != 'Video'
+                      " src="{{
+                        obj.sHash && obj.sHash != undefined
+                          ? 'https://ipfs.infura.io/ipfs/' +
+                            obj.sHash
+                          : 'assets/img/cover/cover1.jpg'
+                      }} " alt="" />
+                  </a>
+
+                  <ng-container *ngIf="
+                      obj.eType &&
+                      obj.eType != undefined &&
+                      obj.eType == 'Audio'
+                    ">
+                    <div class="audioPlayerMain" [style.background-image]="'url(' + obj.track_cover + ')'">
+                      <div class="audio__overlay" routerLink="/NFT-detail/{{
+                        obj._id && obj._id != undefined ? obj._id : '-'
+                      }}">
+
+                      </div>
+
+                      <button value="{{
+                          obj._id && obj._id != undefined ? obj._id : '-'
+                        }}" class="play audio-control-btn">
+                        <span class="iconify" data-icon="akar-icons:play" data-width="45" data-height="45"></span>
+                      </button>
+                      <button value="{{
+                          obj._id && obj._id != undefined ? obj._id : '-'
+                        }}" class="pause audio-control-btn d-none">
+                        <span class="iconify" data-icon="akar-icons:pause" data-width="45" data-height="45"></span>
+                      </button>
+
+                      <audio id="{{
+                        obj._id && obj._id != undefined ? obj._id : '-'
+                      }}" controls class="sty d-none">
+                        <source src="{{
+                          obj.sHash && obj.sHash != undefined
+                            ? 'https://ipfs.infura.io/ipfs/' +
+                              obj.sHash
+                            : 'assets/img/cover/cover1.jpg'
+                        }}" type="audio/mp3" />
+                      </audio>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="
+                      obj.eType &&
+                      obj.eType != undefined &&
+                      obj.eType == 'Video'
+                    ">
+                    <div class="audioPlayerMain VideoBG" >
+                      <div class="audio__overlay" routerLink="/NFT-detail/{{
+                        obj._id && obj._id != undefined ? obj._id : '-'
+                      }}">
+
+                      </div>
+
+                      <button value="{{
+                          obj._id && obj._id != undefined ? obj._id : '-'
+                        }}" class="play video-control-btn">
+                        <span class="iconify" data-icon="akar-icons:play" data-width="45" data-height="45"></span>
+                      </button>
+                      <button value="{{
+                          obj._id && obj._id != undefined ? obj._id : '-'
+                        }}" class="pause video-control-btn d-none">
+                        <span class="iconify" data-icon="akar-icons:pause" data-width="45" data-height="45"></span>
+                      </button>
+
+                      <video id="{{
+                        obj._id && obj._id != undefined ? obj._id : '-'
+                      }}"
+                      poster ="{{ obj.track_cover }}"
+                      playsinline
+                      class="sty Videoplayer">
+                        <source src="{{
+                          obj.sHash && obj.sHash != undefined
+                            ? 'https://ipfs.infura.io/ipfs/' +
+                              obj.sHash
+                            : 'assets/img/cover/cover1.jpg'
+                        }}"  />
+                      </video>
+                    </div>
+                  </ng-container>
+                  <span class="card__time card__time--clock">
+                    {{
+                    obj.eAuctionType && obj.eAuctionType != undefined
+                    ? obj.eAuctionType
+                    : "-"
+                    }}
+                  </span>
+                  <span class="card__time card__time--clock" *ngIf="obj.hiddenContent !='' && obj.hiddenContent!=undefined" 
+                  style="margin-left: 54%; width: 45%;justify-content: center;">
+                    NFT Pack
+                
+                  </span>
+                </div>
+
+                <h3 class="card__title">
+                  <a href="javascript:;" routerLink="/NFT-detail/{{
+                      obj._id && obj._id != undefined ? obj._id : '-'
+                    }}">{{
+                    obj.sName && obj.sName != undefined
+                    ? obj.sName
+                    : "UnKnown"
+                    }}</a>
+                </h3>
+                <div class="card__author card__author--verified">
+                  <!--<img
+                    src="{{
+                      obj.oUser &&
+                      obj.oUser != undefined &&
+                      obj.oUser['sProfilePicUrl'] != undefined
+                        ? 'https://ipfs.infura.io/ipfs/' +
+                          obj.oUser['sProfilePicUrl']
+                        : 'assets/img/avatars/avatar9.jpg'
+                    }}"
+                    alt=""
+                  />-->
+              
+                  <a
+                    href="javascript:;"
+                    routerLink="/artist/{{ 
+                      obj.oPostedByUser && 
+                      obj.oPostedByUser != undefined && 
+                      obj.oPostedByUser.sUserName != '' && 
+                      obj.oPostedByUser.sUserName ? obj.oPostedByUser.sUserName : obj.oPostedByUser._id }}"
+                    >
+                    <span *ngIf="obj.oPostedByUser &&
+                    obj.oPostedByUser != undefined &&
+                    obj.oPostedByUser.sUserName !== undefined &&
+                    obj.oPostedByUser.sUserName !== '' && obj.oPostedByUser.sUserName.length>=10">
+                    {{
+                      obj.oPostedByUser &&
+                      obj.oPostedByUser != undefined &&
+                      obj.oPostedByUser.sUserName !== undefined &&
+                      obj.oPostedByUser.sUserName !== ''
+                      ? obj.oPostedByUser.sUserName.slice(0,10)
+                      : "-"
+                      }}.....
+                  </span>
+                  <span *ngIf="obj.oPostedByUser &&
+                  obj.oPostedByUser != undefined &&
+                  obj.oPostedByUser.sUserName !== undefined &&
+                  obj.oPostedByUser.sUserName !== '' && obj.oPostedByUser.sUserName.length<10">
+                  {{
+                    obj.oPostedByUser &&
+                    obj.oPostedByUser != undefined &&
+                    obj.oPostedByUser.sUserName !== undefined &&
+                    obj.oPostedByUser.sUserName !== ''
+                    ? obj.oPostedByUser.sUserName
+                    : "-"
+                    }}
+                </span>
+                    
+                   </a
+                  >
+                </div>
+
+                <div class="card__info">
+                  <div class="card__price">
+                    <span>Current price</span>
+                    <span *ngIf="obj.eAuctionType=='Fixed Sale'">{{
+                      obj.nBasePrice && obj.nBasePrice != undefined
+                      ? obj.nBasePrice["$numberDecimal"]
+                      : 0
+                      }}
+                      MATIC</span>
+                    <span *ngIf="obj.eAuctionType=='Auction'">{{
+                      obj.nBasePrice && obj.nBasePrice != undefined
+                      ? obj.nBasePrice["$numberDecimal"]
+                      : 0
+                      }}
+                      USDC</span>
+
+                    <span *ngIf="obj.eAuctionType=='Auction|Fixed Sale' || obj.eAuctionType=='Fixed Sale|Auction'">{{
+                      obj.nBasePrice && obj.nBasePrice != undefined
+                      ? obj.nBasePrice["$numberDecimal"]
+                      : 0
+                      }}
+                      MATIC</span>
+                  </div>
+
+                  <!-- <button class="card__likes" (click)="clickLike(obj._id)" [ngClass]="{
+                      'card__likes--active': obj.is_user_like == 'true'
+                    }" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z" />
+                    </svg>
+
+                    <span>{{
+                      obj.user_likes_size && obj.user_likes_size != undefined
+                      ? obj.user_likes_size
+                      : "0"
+                      }}</span>
+                  </button> -->
+                </div>
+              </div>
+              <!-- end card -->
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- paginator -->
+        <div class="row row--grid">
+          <div class="col-12">
+            <div class="paginator">
+              <span class="paginator__pages"
+                >{{
+                  filterData && filterData["recordsFiltered"]
+                    ? filterData["recordsFiltered"]
+                    : 0
+                }}
+                of
+                {{
+                  filterData && filterData["recordsTotal"]
+                    ? filterData["recordsTotal"]
+                    : 0
+                }}</span
+              >
+
+              <ul
+                class="paginator__list"
+                *ngIf="
+                  filterData['recordsFiltered'] < filterData['recordsTotal']
+                "
+              >
+                <div class="filter__group">
+                  <button
+                    class="filter__btn"
+                    type="button"
+                    style="width: 126%"
+                    (click)="onClickLoadMore()"
+                  >
+                    Load More
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end paginator -->
+      </div>
+      <!-- end content -->
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

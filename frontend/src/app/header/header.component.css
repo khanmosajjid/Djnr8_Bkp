@@ -1,0 +1,6 @@
+.header__nav-link.discordLink svg {
+    width: 25px;
+}
+.header__nav-link.discordLink svg:hover {
+    fill: #fff;
+}

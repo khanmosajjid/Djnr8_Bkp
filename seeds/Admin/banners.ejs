@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- xhtml/index.html08:17:22 -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Banners | Djenerates </title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="./../assets/images/favicon/favicon.png">
+
+
+    <link rel="stylesheet" href="../assets/vendor/summernote/summernote.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+
+    <!-- <link href="../assets/css/style.css" rel="stylesheet"> -->
+    <link href="../assets/css/admin-style.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!-- Include Header -->
+        <%- include('header'); -%>
+
+        <!-- Include Sidebar -->
+        <%- include('sidebar'); -%>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Banners</h4>
+                            </div>
+                            <form method="post" enctype="multipart/form-data" id="AddBannerForm">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Banner Image Desktop(Recomended size 400x1900px)*</label>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg"  class="form-control mb-3" name="banner_image_desktop" id="banner-img-desktop" onchange="CheckDimensionDesktop()" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Banner Image Mobile(Recomended size 200x400px)*</label>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg"  class="form-control mb-3" name="banner_image_mobile" id="banner-img-mobile" onchange="CheckDimensionMobile()" required />
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>Banner Heading</label>
+                                        <input type="text" class="form-control mb-3" name="banner_heading" id="banner_heading" />
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <label>Banner Sub Heading</label>
+                                        <input type="text" class="form-control mb-3" name="banner_sub_heading"  id="banner_sub_heading" />
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label>Collection Address*</label>
+                                        <input type="text" class="form-control mb-3" name="banner_URL"  id="banner_URL" onchange="CheckAddress()" required />
+                                    </div>
+                                   
+                                    
+                                    
+                                    <button type="submit" class="btn btn-primary btn-lg"
+                                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin '></i> Processing"
+                                        data-normal-text="Update" type="button" id="banner_insert" value="Upload" >Add</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .card -->
+        </div><!-- .container -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!--**********************************
+            Content body end
+        ***********************************-->
+
+    <!--**********************************
+            Footer start
+        ***********************************-->
+
+    <%- include('footer'); -%>
+
+    <!--**********************************
+            Footer end
+        ***********************************-->
+
+    </div>
+    <!--**********************************
+        Main wrapper end 
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script type="text/javascript">
+        
+        function CheckAddress() {
+            //Get reference of File.
+            var fileUpload = document.getElementById("banner_URL");
+         
+            //Check whether the file is valid Image.
+            var regex = new RegExp("^0x[a-fA-F0-9]{40}$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+         
+                console.log("valid address")
+               
+            } else {
+                alert("Please Enter Valid Address.");
+                return false;
+            }
+        }
+        
+        
+        function CheckDimensionDesktop() {
+            //Get reference of File.
+            var fileUpload = document.getElementById("banner-img-desktop");
+         
+            //Check whether the file is valid Image.
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif|.jpeg)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+         
+                //Check whether HTML5 is supported.
+                if (typeof (fileUpload.files) != "undefined") {
+                    //Initiate the FileReader object.
+
+                    var reader = new FileReader();
+                    //Read the contents of Image File.
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function (e) {
+                        //Initiate the JavaScript Image object.
+                        var image = new Image();
+         
+                        //Set the Base64 string return from FileReader as source.
+                        image.src = e.target.result;
+                               
+                        //Validate the File Height and Width.
+                        image.onload = function () {
+                            var height = this.height;
+                            var width = this.width;
+                            if (height <400 || width < 1900) {
+                            //show width and height to user
+                            //    document.getElementById("width").innerHTML=width;
+                            //    document.getElementById("height").innerHTML=height;
+                                alert("Height and Width must be greater than 400px and 1900px");
+                                window.location.reload()
+                                return false;
+                            }
+                            if (height>450 || width >2000) {
+                            //show width and height to user
+                            //    document.getElementById("width").innerHTML=width;
+                            //    document.getElementById("height").innerHTML=height;
+                                alert("Height and Width must be less than 450px and 2000px");
+                                window.location.reload()
+                                return false;
+                            }
+                           
+                            return true;
+                        };
+         
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
+            }
+        }
+        
+        
+         
+        function CheckDimensionMobile() {
+            //Get reference of File.
+            var fileUpload = document.getElementById("banner-img-mobile");
+         
+            //Check whether the file is valid Image.
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif|.jpeg)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+         
+                //Check whether HTML5 is supported.
+                if (typeof (fileUpload.files) != "undefined") {
+                    //Initiate the FileReader object.
+
+                    var reader = new FileReader();
+                    //Read the contents of Image File.
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function (e) {
+                        //Initiate the JavaScript Image object.
+                        var image = new Image();
+         
+                        //Set the Base64 string return from FileReader as source.
+                        image.src = e.target.result;
+                               
+                        //Validate the File Height and Width.
+                        image.onload = function () {
+                            var height = this.height;
+                            var width = this.width;
+                         
+                            if (height <200 || width < 400) {
+                            //show width and height to user
+                            //    document.getElementById("width").innerHTML=width;
+                            //    document.getElementById("height").innerHTML=height;
+                                alert("Height and Width must be greater than 200px and 400px");
+                                window.location.reload()
+                                return false;
+                            }
+                            if (height >250 || width > 768) {
+                            //show width and height to user
+                            //    document.getElementById("width").innerHTML=width;
+                            //    document.getElementById("height").innerHTML=height;
+                                alert("Height and Width must be less than 250px and 768px");
+                                window.location.reload()
+                                return false;
+                            }
+                           
+                            return true;
+                        };
+         
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
+            }
+        }
+        
+        
+        </script>
+
+    <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/custom.min.js"></script>
+    <script src="../assets/js/deznav-init.js"></script>
+
+    <script src="../Admin/js/banners.js"></script>
+
+</body>
+
+<!-- xhtml/index.html08:18:50 -->
+
+</html>

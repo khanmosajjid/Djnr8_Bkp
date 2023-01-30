@@ -1,0 +1,60 @@
+<app-header></app-header>
+<main class="main">
+	
+	<div class="main__author"></div>
+	<div class="container">
+	
+	  
+	  <!--faq section-->
+	  
+	  <div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="main__title">
+				  <h2><a href="javascript:;" class="auction-title">FREQUENTLY ASKED QUESTIONS</a></h2>
+				</div>
+			  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="col-sm-12">
+			
+			<div class="tab-content">
+			  <div id="tab1"  class="tab-pane fade show active">
+				<div class="accordion">
+				  <div class="card" *ngFor="let obj of FaqData let isFirst = first let i = index">
+					<div class="card-header" [id]="'infraOne'+i">
+					  <a [href]="'#collapse'+i" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false" [attr.aria-controls]="'collapse'+i">
+					
+						<p class="mb-0">
+							
+							{{
+								obj && obj.oFAQs_data != undefined
+								? obj.oFAQs_data.sQuestion
+								: "UnKnown"
+								}}
+						</p>
+					  </a>
+					</div>
+					<div [id]="'collapse'+i" class="collapse" [attr.aria-labelledby]="'infraOne'+i" [attr.data-parent]="'#collapse'+i">
+					  <div class="card-body">
+						{{
+							obj && obj.oFAQs_data != undefined
+							? obj.oFAQs_data.sAnswer
+							: "UnKnown"
+							}}
+					  </div>
+					</div>
+				  </div>
+				 
+				</div>
+			  </div>
+		
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  
+	</div>
+  </main>
+  <app-footer></app-footer>

@@ -1,0 +1,22 @@
+# Ignoring node_modules folders
+node_modules
+frontend/node_modules
+nft
+
+
+
+
+
+# Ignoring VSCode ide configs
+.vscode
+
+# Ignoring ENV file
+.env
+
+# Ignoring package-lock
+package-lock.json
+
+# Ignoring DS_store
+.DS_store
+
+frontend/node_modules
